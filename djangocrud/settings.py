@@ -82,15 +82,23 @@ WSGI_APPLICATION = 'djangocrud.wsgi.application'
 
 DATABASES = {
     'default': 
-        dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
-        conn_max_age=600
-    )
+    #     dj_database_url.config(
+    #     # Replace this value with your local database's connection string.
+    #     default='postgresql://postgres:postgres@localhost:5432/mysite',
+    #     conn_max_age=600
+    # )
     # {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+    {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'BaseDeDjango',
+            'USER': 'administrador',
+            'PASSWORD': 'pass',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
 }
 
 
@@ -142,3 +150,11 @@ LOGIN_URL = '/signin'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Configuracion gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # por ejemplo: smtp.gmail.com
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'pruebadedjango46@gmail.com'
+EMAIL_HOST_PASSWORD = 'luhvxgshgupfbefi'

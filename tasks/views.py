@@ -7,6 +7,9 @@ from .forms import TaskForm
 from .models import Task
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.contrib.auth.tokens import default_token_generator
+from django.urls import reverse
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -22,8 +25,16 @@ def signup(request):
             #register user
             try:
                 user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'], email=request.POST['email'])
+                email1=request.POST['email']
                 user.save()
                 login(request, user)
+                send_mail(
+                'Hola desde django app',
+                'Felicidades has creado tu cuenta exitosamente',
+                'pruebadedjango46@gmail.com',
+                [email1],
+                fail_silently=False  
+                )
                 return redirect('tasks')
             except IntegrityError:
                 return render(request,'signup.html',{
@@ -124,4 +135,45 @@ def delete_task(request, task_id):
     if request.method == 'POST':
         task.datecompleted = timezone.now()
         task.delete()
-        return redirect('tasks')
+        return redirect('tasks')     
+
+@login_required
+def perfil(request, user_id):
+    datos = User.objects.get(id=user_id)
+    return render(request, 'profile.html',{
+        'datos': datos
+    })
+
+@login_required
+def editProfile(request, user_id):
+        if request.method == 'GET':
+            datos = User.objects.get(id=user_id)
+            return render(request, 'edit_profile.html',{
+            'datos': datos
+        })
+        else:
+            user_id = request.POST['id']
+            name = request.POST['userName']
+            mail = request.POST['userEmail']
+            
+            datos = User.objects.get(id=user_id)
+            datos.username = name
+            datos.email = mail
+            datos.save()
+            return redirect('/')
+        
+def solicitarRestablecerContra(request, user_id):
+        user = User.objects.get(id=user_id)
+        token = default_token_generator(user)
+        reset_url = request.build_absolute_uri(reverse('restablecer_contraseña', args=[token]))
+        send_mail(
+            'Restablecer tu contraseña',
+            f'Por favor, haz clic en el siguiente enlace para restablecer tu contraseña: {reset_url}',
+            'pruebadedjango46@gmail.com',
+            [user.email],
+            fail_silently=False
+        )
+        return redirect(request, 'restablecer_contraseña.html')
+    
+def restablecer_contraseña(request):
+    return render(request, 'restablecer_contraseña.html')

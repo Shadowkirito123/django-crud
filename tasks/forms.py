@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django.db import models
 from django import forms
 from .models import Task
 from django.contrib.auth.forms import UserCreationForm

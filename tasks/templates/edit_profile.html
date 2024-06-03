@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-4 offset-md-4 mt-5">
+    <section class="card card-body">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h1 class="text-center">Editar datos</h1>
+            <h5><input type="hidden" name="id" value="{{datos.id}}"></h5>
+            <h5>Nombre de usuario: <input type="text" name="userName" value="{{datos}}"></h5>
+            <h5>Correo: <input type="email" name="userEmail" value="{{datos.email}}"></h5>
+
+            <div class="text-center">
+                <form action="{% url 'edit_usuario' user.id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-primary">
+                        Guardar
+                    </button>
+                </form>
+                
+            </div>
+        </form>
+    </section>
+</div>   
+{% endblock %}

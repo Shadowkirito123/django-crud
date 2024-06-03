@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-4 offset-md-4 mt-5">
+    <section class="card card-body">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h1 class="text-center">Usuario</h1>
+            <h5>Usuario: {{datos}}</h5>
+            <h5>Correo: {{datos.email}}</h5>
+
+            <div class="text-center">
+                <a class="btn btn-primary" href="{% url 'edit_usuario' user.id%}">
+                    Actualizar
+                </a>
+                
+            </div>
+
+            <div class="text-center">
+                <form action="{% url 'restablecerContra' user.id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-primary mt-3">
+                        Cambiar contraseña
+                    </button>
+                </form>
+            </div>
+        </form>
+    </section>
+</div>    
+
+    
+
+{% endblock %}

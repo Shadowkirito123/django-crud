@@ -29,4 +29,8 @@ urlpatterns = [
     path('signin/', views.signip, name='signin'),
     path('createtask/', views.create_task, name='createtask'),
     path('tasks/<int:task_id>', views.task_detail, name='task detail'),
+    path('usuario/<int:user_id>', views.perfil, name='usuario'),
+    path('editarUsuario/<int:user_id>', views.editProfile, name='edit_usuario'),
+    path('solicitarContra/<int:user_id>', views.solicitarRestablecerContra, name='solicitarContraseña'),
+    path('restablacerClave/<int:user_id>', views.restablecer_contraseña, name='restablecerContra')
 ]

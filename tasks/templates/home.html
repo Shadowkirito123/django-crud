@@ -1,19 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
     <main class="container py-5">
+        {% if user.is_authenticated %}
         <section class="card card-body">
             <h1 class="text-center">Django App</h1>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor reprehenderit libero ex fugiat doloremque possimus exercitationem. Eos, natus perferendis aut corrupti ipsa reiciendis quam, explicabo iusto, tempore inventore incidunt sed.</p>
         </section>
-
-        <div class="text-center"> 
-            <a class="btn btn-primary" href="/signin/">
-                Iniciar sesion
-            </a>
-            <a class="btn btn-primary" href="/signup/">
-                Registrarse
-            </a>
-        </div>
-
+        {% else %}
+            <section class="card card-body">
+                <h1 class="text-center">Django App</h1>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor reprehenderit libero ex fugiat doloremque possimus exercitationem. Eos, natus perferendis aut corrupti ipsa reiciendis quam, explicabo iusto, tempore inventore incidunt sed.</p>
+            </section>
+            <div class="text-center"> 
+                <a class="btn btn-primary" href="/signin/">
+                    Iniciar sesion
+                </a>
+                <a class="btn btn-primary" href="/signup/">
+                    Registrarse
+                </a>
+            </div>
+        {% endif %}
     </main>
 {% endblock %}
