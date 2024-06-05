@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator
 from django.urls import reverse
+from django.http import HttpResponse
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -161,19 +162,59 @@ def editProfile(request, user_id):
             datos.email = mail
             datos.save()
             return redirect('/')
-        
-def solicitarRestablecerContra(request, user_id):
-        user = User.objects.get(id=user_id)
-        token = default_token_generator(user)
-        reset_url = request.build_absolute_uri(reverse('restablecer_contraseña', args=[token]))
+
+@login_required
+def cambiarContraseña(request, user_id):
+    if request.method == 'GET':
+        datos = User.objects.get(id=user_id)
+        return render(request, 'solicitar_restablecimiento.html',{
+            'datos':datos
+        })
+    else:
+        user = User.objects.get(pk=user_id)
+        email = user.email
+        token = default_token_generator.make_token(user)
+        reset_url = request.build_absolute_uri(reverse('restablecer_contraseña', args=[user.pk,token])) 
         send_mail(
             'Restablecer tu contraseña',
-            f'Por favor, haz clic en el siguiente enlace para restablecer tu contraseña: {reset_url}',
-            'pruebadedjango46@gmail.com',
-            [user.email],
-            fail_silently=False
-        )
-        return redirect(request, 'restablecer_contraseña.html')
+                    f'Por favor, haz clic en el siguiente enlace para restablecer tu contraseña: {reset_url}',
+                    'pruebadedjango46@gmail.com',
+                    [email],
+                    fail_silently=False
+                )
+        return redirect('/')
     
-def restablecer_contraseña(request):
-    return render(request, 'restablecer_contraseña.html')
+def regresarAlInicio(request):
+    return redirect('/')
+
+# @login_required
+# def restablecer_contraseña(request, user_id):
+#     if request.method == 'GET':
+#         datos = User.objects.get(pk=user_id)
+#         return render(request, 'restablecer_contraseña.html', {
+#             'datos': datos
+#         })
+#     elif request.method == 'POST':
+#         user = User.objects.get(pk=request.session['id'])
+#         user.set_password(request.POST['password1'])
+#         user.save()
+#         return redirect('signin')
+        
+def restablecer_contraseña(request, token, user_id):
+    print(f"Request method: {request.method}")
+    print(f"Token: {token}")
+    print(f"User ID: {user_id}")
+    if request.method == 'POST':
+        user = User.objects.get(pk=user_id)
+        user.set_password(request.POST['password1'])
+        user.save()
+        return redirect('signin')
+    try:
+        user = User.objects.get(pk=user_id)
+        if default_token_generator.check_token(user, token):
+            request.session['id'] = user_id
+            return render(request,'restablecer_contraseña.html')
+        else:
+            return HttpResponse('Token inválido')
+    except:
+        return HttpResponse('Solicitud inválida')

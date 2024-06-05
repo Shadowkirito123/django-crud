@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Correo</h1>
+<h2>Restablecer contraseña</h2>
+<form action="{% url 'restablecer_contraseña' user.id %}" method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="id" value="{{datos.id}}">
+
+  <h5><label for="password1">nserte su nueva contraseña:</label>I <input type="password" name="password1" id="password1" placeholder="Su nueva contraseña aqui"></h5>
+
+  <button>
+    Confirmar
+  </button>
+
+</form>
 {% endblock %}

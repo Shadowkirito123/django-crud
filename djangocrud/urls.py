@@ -31,6 +31,7 @@ urlpatterns = [
     path('tasks/<int:task_id>', views.task_detail, name='task detail'),
     path('usuario/<int:user_id>', views.perfil, name='usuario'),
     path('editarUsuario/<int:user_id>', views.editProfile, name='edit_usuario'),
-    path('solicitarContra/<int:user_id>', views.solicitarRestablecerContra, name='solicitarContraseña'),
-    path('restablacerClave/<int:user_id>', views.restablecer_contraseña, name='restablecerContra')
+    path('usuario/<int:user_id>/cambiarContraseña', views.cambiarContraseña, name='cambiarContraseña'),
+    path('usuario/cancelar', views.regresarAlInicio, name='regreso'),
+    path('usuario/<int:user_id>/restablacerClave/<str:token>', views.restablecer_contraseña, name='restablecer_contraseña')
 ]

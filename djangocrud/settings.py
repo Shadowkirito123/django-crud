@@ -82,23 +82,23 @@ WSGI_APPLICATION = 'djangocrud.wsgi.application'
 
 DATABASES = {
     'default': 
-        dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
-        conn_max_age=600
-    )
+    #     dj_database_url.config(
+    #     # Replace this value with your local database's connection string.
+    #     default='postgresql://postgres:postgres@localhost:5432/mysite',
+    #     conn_max_age=600
+    # )
     # {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
-    # {
-    #         'ENGINE': 'django.db.backends.mysql',
-    #         'NAME': 'BaseDeDjango',
-    #         'USER': 'administrador',
-    #         'PASSWORD': 'pass',
-    #         'HOST': 'localhost',
-    #         'PORT': '3306',
-    #     }
+    {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'BaseDeDjango',
+            'USER': 'administrador',
+            'PASSWORD': 'pass',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
 }
 
 

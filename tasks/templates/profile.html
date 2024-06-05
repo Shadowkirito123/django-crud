@@ -17,12 +17,9 @@
             </div>
 
             <div class="text-center">
-                <form action="{% url 'restablecerContra' user.id %}" method="POST">
-                    {% csrf_token %}
-                    <button class="btn btn-primary mt-3">
-                        Cambiar contraseña
-                    </button>
-                </form>
+                <a class="btn btn-primary mt-3" href="{% url 'cambiarContraseña' user.id%}">
+                    Cambiar contraseña
+                </a>
             </div>
         </form>
     </section>
