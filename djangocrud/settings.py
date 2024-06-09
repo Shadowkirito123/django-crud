@@ -42,7 +42,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tasks'
+    'tasks',
+    'django_countries'
+    ]
+
+LANGUAGES = [
+    ("en", "English"),
+    ("ko", "Korean"),
+    ("ja", "Japanese"),
+    ('zh-hans', 'Simplified Chinese'),  # 간체 중국어
+    ('zh-hant', 'Traditional Chinese'),  # 번체 중국어
+    ("es", "Spanish"),
+    ("ru", "Russian"),
+    ("ar", "Arabic"),
 ]
 
 MIDDLEWARE = [
@@ -94,11 +106,12 @@ DATABASES = {
     {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BaseDeDjango',
-            'USER': 'administrador',
-            'PASSWORD': 'pass',
+            'USER': 'root',
+            'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '3306',
-        }
+        },
+
 }
 
 

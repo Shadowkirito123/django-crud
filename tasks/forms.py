@@ -1,5 +1,4 @@
 from django.forms import ModelForm
-from django.db import models
 from django import forms
 from .models import Task
 from django.contrib.auth.forms import UserCreationForm
@@ -13,3 +12,4 @@ class TaskForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder':'Escribe un titulo'}),
             # 'important': forms.CheckboxInput(attrs={'class': 'form-control'})
         }
+    

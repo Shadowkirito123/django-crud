@@ -11,13 +11,15 @@ from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator
 from django.urls import reverse
 from django.http import HttpResponse
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
 def signup(request):
-    
     if request.method == 'GET':
-         return render(request,'signup.html',{
+        return render(request,'signup.html',{
         'form': UserCreationForm
     })
     
@@ -27,6 +29,7 @@ def signup(request):
             try:
                 user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'], email=request.POST['email'])
                 email1=request.POST['email']
+                username1 = request.POST['username']
                 user.save()
                 login(request, user)
                 send_mail(
@@ -36,6 +39,25 @@ def signup(request):
                 [email1],
                 fail_silently=False  
                 )
+                
+                #Captura de sitio web
+                
+                # Crea una nueva instancia del navegador Firefox
+                options = ChromeOptions()
+                options.add_argument("--headless")
+                driver = webdriver.Chrome(options=options)
+
+                # Navega a la página web que quieres capturar
+                driver.get(request.POST['web'])
+
+                # Toma una captura de pantalla de la página actual
+                driver.save_screenshot(f'{username1}.png')
+
+                # Cierra el navegador
+                driver.quit()
+                
+                #
+                
                 return redirect('tasks')
             except IntegrityError:
                 return render(request,'signup.html',{
@@ -186,19 +208,6 @@ def cambiarContraseña(request, user_id):
     
 def regresarAlInicio(request):
     return redirect('/')
-
-# @login_required
-# def restablecer_contraseña(request, user_id):
-#     if request.method == 'GET':
-#         datos = User.objects.get(pk=user_id)
-#         return render(request, 'restablecer_contraseña.html', {
-#             'datos': datos
-#         })
-#     elif request.method == 'POST':
-#         user = User.objects.get(pk=request.session['id'])
-#         user.set_password(request.POST['password1'])
-#         user.save()
-#         return redirect('signin')
         
 def restablecer_contraseña(request, token, user_id):
     print(f"Request method: {request.method}")
@@ -218,3 +227,4 @@ def restablecer_contraseña(request, token, user_id):
             return HttpResponse('Token inválido')
     except:
         return HttpResponse('Solicitud inválida')
+    
