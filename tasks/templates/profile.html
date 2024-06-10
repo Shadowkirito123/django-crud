@@ -2,23 +2,32 @@
 
 {% block content %}
 <div class="col-md-4 offset-md-4 mt-5">
-    <section class="card card-body">
-        <form action="" method="POST">
+    <section class="card card-body"  style="border-radius: 25px;">
+        <form action="" method="POST" >
             {% csrf_token %}
-            <h1 class="text-center">Usuario</h1>
-            <h5>Usuario: {{datos}}</h5>
-            <h5>Correo: {{datos.email}}</h5>
+
+            <h1 class="text-center"><i class="fas fa-user"></i> Usuario</h1>
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Usuario:</label>
+                <h5>{{datos}}</h5>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Correo:</label>
+                <h5>{{datos.email}}</h5>
+            </div>
+
+            {% load static %}
+            <h5>Tu pagina web: <img src="{{ datos1.imagen.url }}" alt="Captura de pantalla" class="img-fluid"></h5>
 
             <div class="text-center">
-                <a class="btn btn-primary" href="{% url 'edit_usuario' user.id%}">
-                    Actualizar
+                <a class="btn btn-primary " href="{% url 'edit_usuario' user.id%}" style='background-color: #ffc107; color: black;'>
+                    <i class="fas fa-edit" ></i> Actualizar
                 </a>
-                
             </div>
 
             <div class="text-center">
-                <a class="btn btn-primary mt-3" href="{% url 'cambiarContraseña' user.id%}">
-                    Cambiar contraseña
+                <a class="btn btn-primary mt-3" href="{% url 'cambiarContraseña' user.id%}" style='background-color: #ffc107; color: black;'>
+                    <i class="fas fa-key"></i> Cambiar contraseña
                 </a>
             </div>
         </form>

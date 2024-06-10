@@ -2,23 +2,40 @@
 {% block content %}
     <main class="container py-5">
         {% if user.is_authenticated %}
-        <section class="card card-body">
-            <h1 class="text-center">Django App</h1>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor reprehenderit libero ex fugiat doloremque possimus exercitationem. Eos, natus perferendis aut corrupti ipsa reiciendis quam, explicabo iusto, tempore inventore incidunt sed.</p>
+        <section class="card card-body bg-transparent text-white border-0">
+            <h1 class="text-center"><i class="fas fa-smile"></i> ¡Bienvenido</h1>
+            <p class="text-center"><i class="fas fa-info-circle text-danger"></i> Estamos encantados de verte de nuevo. Explora las nuevas características y funcionalidades que hemos añadido para ti.</p>
         </section>
         {% else %}
-            <section class="card card-body">
-                <h1 class="text-center">Django App</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor reprehenderit libero ex fugiat doloremque possimus exercitationem. Eos, natus perferendis aut corrupti ipsa reiciendis quam, explicabo iusto, tempore inventore incidunt sed.</p>
-            </section>
-            <div class="text-center"> 
-                <a class="btn btn-primary" href="/signin/">
-                    Iniciar sesion
-                </a>
-                <a class="btn btn-primary" href="/signup/">
-                    Registrarse
-                </a>
+        <section class="card card-body bg-transparent text-white border-0">
+            <h1 class="text-center"><i class="fas fa-hand-sparkles"></i> ¡Bienvenido!</h1>
+            <p class="text-center"><i class="fas fa-info-circle text-danger"></i> Estamos emocionados de tenerte aquí. Nuestra aplicación ofrece una variedad de características útiles.</p>
+        </section>
+        <div class="row">
+            <div class="col-md-6">
+                <section class="card card-body bg-transparent text-white border-0">
+                    <h2 class="text-center"><i class="fas fa-user-plus"></i> ¿Nuevo por aquí?</h2>
+                    <p class="text-center"><i class="fas fa-info-circle text-danger"></i> Para comenzar, primero registrate Luego, iniciar sesión.</p>
+                    <div class="text-center"> 
+                        <a class="btn btn-primary" href="/signup/"  style='background-color: #6f42c1; border-color: black;' >
+                            <i class="fas fa-user-plus"></i> Registrarse
+                        </a>
+                    </div>
+                </section>
             </div>
+            <div class="col-md-6">
+                <section class="card card-body bg-transparent text-white border-0">
+                    <h2 class="text-center"><i class="fas fa-sign-in-alt"></i> ¿Ya tienes una cuenta?</h2>
+                    <p class="text-center"><i class="fas fa-info-circle text-danger"></i> Si ya tienes una cuenta, simplemente inicia sesión para continuar.</p>
+                    <div class="text-center"> 
+                        
+                        <a class="btn btn-primary" href="/signin/"  style='background-color: #6f42c1; border-color: black;'>
+                            <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
         {% endif %}
     </main>
 {% endblock %}

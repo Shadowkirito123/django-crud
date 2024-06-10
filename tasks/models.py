@@ -14,4 +14,21 @@ class Task(models.Model):
     
     def __str__(self):
         return self.title + ' - ' + self.user.username
+
+class Tokens(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    token = models.TextField()
+
+class Pagina(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    web = models.TextField(blank=True)
+    imagen = models.ImageField(upload_to='static/', default=None)
     
+    def __str__(self):
+        return self.web
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    country = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)

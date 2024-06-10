@@ -2,21 +2,30 @@
 
 {% block content %}
 <div class="col-md-4 offset-md-4 mt-5">
-    <section class="card card-body">
+    <section class="card card-body" style="border-radius: 25px;">
         <form action="" method="POST">
             {% csrf_token %}
-            <h1 class="text-center">Editar datos</h1>
+            <h1 class="text-center mb-4"><i class="fas fa-edit"></i> Editar datos</h1>
             <h5><input type="hidden" name="id" value="{{datos.id}}"></h5>
-            <h5>Nombre de usuario: <input type="text" name="userName" value="{{datos}}"></h5>
-            <h5>Correo: <input type="email" name="userEmail" value="{{datos.email}}"></h5>
+
+            <div class="mb-3">
+                <label for="userName" class="form-label"><i class="fas fa-user"></i> Nombre de usuario:</label>
+                <input type="text" class="form-control" id="userName" name="userName" value="{{datos}}">
+            </div>
+
+            <div class="mb-3">
+                <label for="userEmail" class="form-label"><i class="fas fa-envelope"></i> Correo:</label>
+                <input type="email" class="form-control" id="userEmail" name="userEmail" value="{{datos.email}}">
+
+            <div class="mb-3">
+                <label for="userEmail" class="form-label"><i class="fas fa-envelope"></i> Pagina web: </label>
+                <input type="text" class="form-control" id="web" name="web" value="{{datos1.web}}">
+
 
             <div class="text-center">
-                <form action="{% url 'edit_usuario' user.id %}" method="POST">
-                    {% csrf_token %}
-                    <button class="btn btn-primary">
-                        Guardar
-                    </button>
-                </form>
+                <button type="submit" class="btn btn-custom" style='background-color: #20c997'>
+                    <i class="fas fa-save"></i> Guardar
+                </button>
                 
             </div>
         </form>
