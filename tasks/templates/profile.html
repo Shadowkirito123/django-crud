@@ -5,20 +5,30 @@
     <section class="card card-body"  style="border-radius: 25px;">
         <form action="" method="POST" >
             {% csrf_token %}
-
-            <h1 class="text-center"><i class="fas fa-user"></i> Usuario</h1>
-            <div class="form-group">
-                <label><i class="fas fa-user"></i> Usuario:</label>
-                <h5>{{datos}}</h5>
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-envelope"></i> Correo:</label>
-                <h5>{{datos.email}}</h5>
-            </div>
-
-            {% load static %}
-            <h5>Tu pagina web: <img src="{{ datos1.imagen.url }}" alt="Captura de pantalla" class="img-fluid"></h5>
-
+            {% if datos1.imagen.url == None %}
+                <h1 class="text-center"><i class="fas fa-user"></i> Usuario</h1>
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Usuario:</label>
+                    <h5>{{datos}}</h5>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Correo:</label>
+                    <h5>{{datos.email}}</h5>
+                </div>
+            {% else %}
+                <h1 class="text-center"><i class="fas fa-user"></i> Usuario</h1>
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Usuario:</label>
+                    <h5>{{datos}}</h5>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Correo:</label>
+                    <h5>{{datos.email}}</h5>
+                </div>
+                {% load static %}
+                <h5>Tu pagina web: <img src="{{ datos1.imagen.url }}" alt="Captura de pantalla" class="img-fluid"></h5>
+            
+            {% endif %}
             <div class="text-center">
                 <a class="btn btn-primary " href="{% url 'edit_usuario' user.id%}" style='background-color: #ffc107; color: black;'>
                     <i class="fas fa-edit" ></i> Actualizar

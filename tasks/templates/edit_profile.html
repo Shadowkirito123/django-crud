@@ -4,26 +4,46 @@
 <div class="col-md-4 offset-md-4 mt-5">
     <section class="card card-body" style="border-radius: 25px;">
         <form action="" method="POST">
+            {% if error %}
+                <div id="errorAlert" class="alert alert-danger" role="alert">
+                  <i class="fas fa-times"></i> {{ error }}
+                </div>
+                {% endif %}
             {% csrf_token %}
-            <h1 class="text-center mb-4"><i class="fas fa-edit"></i> Editar datos</h1>
-            <h5><input type="hidden" name="id" value="{{datos.id}}"></h5>
+            {% if datos1.web == None %}
+                <h1 class="text-center mb-4"><i class="fas fa-edit"></i> Editar datos</h1>
+                <h5><input type="hidden" name="id" value="{{datos.id}}"></h5>
 
-            <div class="mb-3">
-                <label for="userName" class="form-label"><i class="fas fa-user"></i> Nombre de usuario:</label>
-                <input type="text" class="form-control" id="userName" name="userName" value="{{datos}}">
-            </div>
+                <div class="mb-3">
+                    <label for="userName" class="form-label"><i class="fas fa-user"></i> Nombre de usuario:</label>
+                    <input type="text" class="form-control" id="userName" name="userName" value="{{datos}}">
+                </div>
 
-            <div class="mb-3">
-                <label for="userEmail" class="form-label"><i class="fas fa-envelope"></i> Correo:</label>
-                <input type="email" class="form-control" id="userEmail" name="userEmail" value="{{datos.email}}">
+                <div class="mb-3">
+                    <label for="userEmail" class="form-label"><i class="fas fa-envelope"></i> Correo:</label>
+                    <input type="email" class="form-control" id="userEmail" name="userEmail" value="{{datos.email}}">
 
-            <div class="mb-3">
-                <label for="userEmail" class="form-label"><i class="fas fa-envelope"></i> Pagina web: </label>
-                <input type="text" class="form-control" id="web" name="web" value="{{datos1.web}}">
+            {% else %}
+                <h1 class="text-center mb-4"><i class="fas fa-edit"></i> Editar datos</h1>
+                <h5><input type="hidden" name="id" value="{{datos.id}}"></h5>
 
+                <div class="mb-3">
+                    <label for="userName" class="form-label"><i class="fas fa-user"></i> Nombre de usuario:</label>
+                    <input type="text" class="form-control" id="userName" name="userName" value="{{datos}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="userEmail" class="form-label"><i class="fas fa-envelope"></i> Correo:</label>
+                    <input type="email" class="form-control" id="userEmail" name="userEmail" value="{{datos.email}}">
+
+                <div class="mb-3">
+                    <label for="userEmail" class="form-label"><i class="fas fa-envelope"></i> Pagina web: </label>
+                    <input type="text" class="form-control" id="web" name="web" value="{{datos1.web}}">
+
+            {% endif %}
 
             <div class="text-center">
-                <button type="submit" class="btn btn-custom" style='background-color: #20c997'>
+                <button type="submit" class="btn btn-custom mt-3" style='background-color: #20c997'>
                     <i class="fas fa-save"></i> Guardar
                 </button>
                 

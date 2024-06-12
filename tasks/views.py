@@ -17,6 +17,7 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from django.utils.crypto import hmac
 from django.urls.exceptions import NoReverseMatch
 from django.core.files.uploadedfile import SimpleUploadedFile
+import re
 
 # Create your views here.
 def home(request):
@@ -30,46 +31,77 @@ def signup(request):
     
     else:
         if request.POST['password1'] == request.POST['password2']:
-            #register user
-            try:
-                user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'], email=request.POST['email'])
-                email1=request.POST['email']
-                username1 = request.POST['username']
-                user.save()
-                login(request, user)
-                send_mail(
-                'Hola desde django app',
-                'Felicidades has creado tu cuenta exitosamente',
-                'pruebadedjango46@gmail.com',
-                [email1],
-                fail_silently=False  
-                )
-                try:
-                    #Captura de sitio web
-                    
-                    options = ChromeOptions()
-                    options.add_argument("--headless")
-                    driver = webdriver.Chrome(options=options)
-
-                    driver.get(request.POST['web'])
-
-                    driver.save_screenshot(f'C:/Users/Usuario/Desktop/django-crud/tasks/templates/static/{username1}.png')
-
-                    driver.quit()
-                    webpage_content = request.POST['web']
-                    with open(f'C:/Users/Usuario/Desktop/django-crud/tasks/templates/static/{username1}.png', 'rb') as f:
-                        image_file = SimpleUploadedFile(f.name, f.read())
-                    Pagina.objects.create(user=user, web=webpage_content, imagen=image_file)
-                except:
-                    pass
-                #
-                 
-                return redirect('tasks')
-            except IntegrityError:
-                return render(request,'signup.html',{
-                'form': UserCreationForm,
-                'error': 'El usuario ya existe'
+            username = request.POST['username']
+            if re.search(r'[!@#$%^&*(),.?":{}|<>]', username):
+                return render(request, 'signup.html', {
+                    'form': UserCreationForm,
+                    'error': 'Los caracteres especiales no están permitidos.'
                 })
+            
+            email = request.POST['email']
+            if re.search(r'[!#$%^&*(),?":{}|<>]', email):
+                return render(request, 'signup.html', {
+                    'form': UserCreationForm,
+                    'error': 'Los caracteres especiales no están permitidos en el correo electrónico.'
+                })
+            
+            first_name = request.POST['first_name']
+            if re.search(r'[!@#$%^&*(),.?":{}|<>]', first_name):
+                return render(request, 'signup.html', {
+                    'form': UserCreationForm,
+                    'error': 'Los caracteres especiales no están permitidos en el nombre.'
+                })
+            
+            last_name = request.POST['last_name']
+            if re.search(r'[!@#$%^&*(),.?":{}|<>]', last_name):
+                return render(request, 'signup.html', {
+                    'form': UserCreationForm,
+                    'error': 'Los caracteres especiales no están permitidos en el apellido.'
+                })
+            
+            elif User.objects.filter(username=username).exists():
+                return render(request, 'signup.html', {
+                    'form': UserCreationForm,
+                    'error': 'El usuario ya existe'
+                })
+            else:
+                try:
+                    user = User.objects.create_user(username=username, password=request.POST['password1'], email=request.POST['email'], first_name=request.POST['first_name'], last_name=request.POST['last_name'])
+                    email1=request.POST['email']
+                    username1 = request.POST['username']
+                    user.save()
+                    login(request, user)
+                    send_mail(
+                    'Hola desde django app',
+                    'Felicidades has creado tu cuenta exitosamente',
+                    'pruebadedjango46@gmail.com',
+                    [email1],
+                    fail_silently=False  
+                    )
+                    try:
+                        #Captura de sitio web
+                        
+                        options = ChromeOptions()
+                        options.add_argument("--headless")
+                        driver = webdriver.Chrome(options=options)
+
+                        driver.get(request.POST['web'])
+
+                        driver.save_screenshot(f'C:/Users/Usuario/Desktop/django-crud/tasks/templates/static/{username1}.png')
+
+                        driver.quit()
+                        webpage_content = request.POST['web']
+                        with open(f'C:/Users/Usuario/Desktop/django-crud/tasks/templates/static/{username1}.png', 'rb') as f:
+                            image_file = SimpleUploadedFile(f.name, f.read())
+                        Pagina.objects.create(user=user, web=webpage_content, imagen=image_file)
+                    except:
+                        pass
+                    #
+                    
+                    return redirect('/')
+                except IntegrityError:
+                    # Handle the IntegrityError here
+                    pass
         return render(request,'signup.html',{
         'form': UserCreationForm,
         'error': 'Las contraseñas no coinciden'
@@ -168,43 +200,91 @@ def delete_task(request, task_id):
 
 @login_required
 def perfil(request, user_id):
-    datos = User.objects.get(id=user_id)
-    datos1 = get_object_or_404(Pagina, user=user_id)
-    return render(request, 'profile.html',{
-        'datos': datos,
-        'datos1': datos1
-    })
+    try:
+        datos = User.objects.get(id=user_id)
+        datos1 = get_object_or_404(Pagina, user=user_id)
+        return render(request, 'profile.html',{
+            'datos': datos,
+            'datos1': datos1
+        })
+    except:
+        datos = User.objects.get(id=user_id)
+        return render(request, 'profile.html',{
+            'datos': datos
+        })
 
 @login_required
 def editProfile(request, user_id):
         if request.method == 'GET':
-            datos = User.objects.get(id=user_id)
-            datos1 = get_object_or_404(Pagina, user=user_id)
-            return render(request, 'edit_profile.html',{
-            'datos': datos,
-            'datos1': datos1
-        })
+            try:
+                datos = User.objects.get(id=user_id)
+                datos1 = get_object_or_404(Pagina, user=user_id)
+                return render(request, 'edit_profile.html',{
+                'datos': datos,
+                'datos1': datos1
+            })
+            except:
+                datos = User.objects.get(id=user_id)
+                return render(request, 'edit_profile.html',{
+                'datos': datos
+                })
         else:
-            #link de pagina
-            user_id = request.POST['id']
-            web = request.POST['web']
-            #
-            
-            #nombre y email del usuario
-            user_id = request.POST['id']
-            name = request.POST['userName']
-            mail = request.POST['userEmail']
-            #
-            #Actualizando datos
-            datos = User.objects.get(id=user_id)
-            datos1 = get_object_or_404(Pagina, user=user_id)
-            datos.username = name
-            datos.email = mail
-            datos1.web = web
-            datos1.save()
-            datos.save()
-            return redirect('/')
-            #
+            try:
+                #link de pagina
+                user_id = request.POST['id']
+                web = request.POST['web']
+                #
+                
+                #nombre y email del usuario
+                name = request.POST['userName']
+                if re.search(r'[!@#$%^&*(),.?":{}|<>+]', name):
+                    datos = User.objects.get(id=user_id)
+                    return render(request, 'edit_profile.html',{
+                        'datos': datos,
+                        'error': 'Los caracteres especiales no están permitidos en el nombre de usuario.'
+                    })
+                mail = request.POST['userEmail']
+                if re.search(r'[!#$%^&*(),?":{}|<>+]', mail):
+                    datos = User.objects.get(id=user_id)
+                    return render(request, 'edit_profile.html', {
+                        'datos': datos,
+                        'error': 'Los caracteres especiales no están permitidos en el correo electrónico.'
+                    })
+                #
+                #Actualizando datos
+                datos = User.objects.get(id=user_id)
+                datos1 = get_object_or_404(Pagina, user=user_id)
+                datos.username = name
+                datos.email = mail
+                datos1.web = web
+                datos1.save()
+                datos.save()
+                return redirect('/')
+                #
+            except:
+                #nombre y email del usuario
+                user_id = request.POST['id']
+                name = request.POST['userName']
+                if re.search(r'[!@#$%^&*(),.?":{}|<>]', name):
+                    datos = User.objects.get(id=user_id)
+                    return render(request, 'edit_profile.html',{
+                        'datos': datos,
+                        'error': 'Los caracteres especiales no están permitidos en el nombre de usuario.'
+                    })
+                mail = request.POST['userEmail']
+                if re.search(r'[!#$%^&*(),?":{}|<>]', mail):
+                    datos = User.objects.get(id=user_id)
+                    return render(request, 'edit_profile.html', {
+                        'datos': datos,
+                        'error': 'Los caracteres especiales no están permitidos en el correo electrónico.'
+                    })
+                #
+                #Actualizando datos
+                datos = User.objects.get(id=user_id)
+                datos.username = name
+                datos.email = mail
+                datos.save()
+                return redirect('/')
 @login_required
 def cambiarContraseña(request, user_id):
     if request.method == 'GET':

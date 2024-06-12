@@ -4,10 +4,14 @@
     
 <main class="container">
     <div class="row">
-        <div class="col-md-4 offset-md-4 mt-5">
+        <div class="col-md-8 offset-md-2 mt-5">
             <form action="" method="POST" class="card card-body" style="background-color: transparent; border-color: white;">
                 <h1 class="text-center text-white">Registrarse</h1>
-                {{error}}
+                {% if error %}
+                <div id="errorAlert" class="alert alert-danger" role="alert">
+                  <i class="fas fa-times"></i> {{ error }}
+                </div>
+                {% endif %}
                 {% csrf_token %}
 
                 <div class="mb-3">
@@ -15,6 +19,22 @@
                     <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-user"></i></span> 
                         <input type="text" name="username" id="username" class="form-control" placeholder="Escribe tu nombre de usuario" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="first_name" class="form-label text-white">Nombre</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-regular fa-user"></i></span> 
+                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Escribe tu nombre" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="last_name" class="form-label text-white">Apellido</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-regular fa-user"></i></span> 
+                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Escribe tu Apellido" required>
                     </div>
                 </div>
 
