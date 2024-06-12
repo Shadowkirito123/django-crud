@@ -14,7 +14,6 @@ from django.http import HttpResponse
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from django.utils.crypto import hmac
 from django.urls.exceptions import NoReverseMatch
 from django.core.files.uploadedfile import SimpleUploadedFile
 import re
@@ -87,11 +86,11 @@ def signup(request):
 
                         driver.get(request.POST['web'])
 
-                        driver.save_screenshot(f'C:/Users/Usuario/Desktop/django-crud/tasks/templates/static/{username1}.png')
+                        driver.save_screenshot(f'C:/Users/advps_local/Documents/nuevo repositorio/django-crud/tasks/templates/static/{username1}.png')
 
                         driver.quit()
                         webpage_content = request.POST['web']
-                        with open(f'C:/Users/Usuario/Desktop/django-crud/tasks/templates/static/{username1}.png', 'rb') as f:
+                        with open(f'C:/Users/advps_local/Documents/nuevo repositorio/django-crud/tasks/templates/static/{username1}.png', 'rb') as f:
                             image_file = SimpleUploadedFile(f.name, f.read())
                         Pagina.objects.create(user=user, web=webpage_content, imagen=image_file)
                     except:
