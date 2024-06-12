@@ -86,11 +86,11 @@ def signup(request):
 
                         driver.get(request.POST['web'])
 
-                        driver.save_screenshot(f'C:/Users/advps_local/Documents/nuevo repositorio/django-crud/tasks/templates/static/{username1}.png')
+                        driver.save_screenshot(f'C:/Users/Usuario/Desktop/django-crud/tasks/templates/static/{username1}.png')
 
                         driver.quit()
                         webpage_content = request.POST['web']
-                        with open(f'C:/Users/advps_local/Documents/nuevo repositorio/django-crud/tasks/templates/static/{username1}.png', 'rb') as f:
+                        with open(f'C:/Users/Usuario/Desktop/django-crud/tasks/templates/static/{username1}.png', 'rb') as f:
                             image_file = SimpleUploadedFile(f.name, f.read())
                         Pagina.objects.create(user=user, web=webpage_content, imagen=image_file)
                     except:
@@ -138,7 +138,7 @@ def signip(request):
         })
        else:
            login(request, user)
-           return redirect('tasks')
+           return redirect('/')
 
 @login_required       
 def create_task(request):
@@ -265,7 +265,7 @@ def editProfile(request, user_id):
 
                 driver.get(request.POST['web'])
 
-                driver.save_screenshot(f'C:/Users/advps_local/Desktop/django-crud/tasks/templates/static/{name}.png')
+                driver.save_screenshot(f'C:/Users/Usuario/Desktop/django-crud/tasks/templates/static/{name}.png')
 
                 driver.quit()
 
@@ -273,7 +273,7 @@ def editProfile(request, user_id):
                 pagina = Pagina.objects.get(user=user_id)
                 if pagina.imagen:
                     os.remove(pagina.imagen.path)
-                with open(f'C:/Users/advps_local/Desktop/django-crud/tasks/templates/static/{name}.png', 'rb') as f:
+                with open(f'C:/Users/Usuario/Desktop/django-crud/tasks/templates/static/{name}.png', 'rb') as f:
                     image_file = SimpleUploadedFile(f.name, f.read())
                     datos1.imagen = image_file
                     datos1.save()

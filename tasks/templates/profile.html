@@ -36,16 +36,18 @@
                 </div>
             
             {% endif %}
-            <div class="text-center">
-                <a class="btn btn-primary " href="{% url 'edit_usuario' user.id%}" style='background-color: #ffc107; color: black;'>
-                    <i class="fas fa-edit" ></i> Actualizar
-                </a>
-            </div>
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-primary mt-3" href="{% url 'edit_usuario' user.id%}" style='background-color: #ffc107; color: black;'>
+                        <i class="fas fa-edit" ></i> Actualizar
+                    </a>
+                </div>
 
-            <div class="text-center">
-                <a class="btn btn-primary mt-3" href="{% url 'cambiarContraseña' user.id%}" style='background-color: #ffc107; color: black;'>
-                    <i class="fas fa-key"></i> Cambiar contraseña
-                </a>
+                <div class="col">
+                    <a class="btn btn-primary mt-3" href="{% url 'cambiarContraseña' user.id%}" style='background-color: #ffc107; color: black;'>
+                        <i class="fas fa-key"></i> Cambiar contraseña
+                    </a>
+                </div>
             </div>
         </form>
     </section>
