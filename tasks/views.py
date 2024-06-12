@@ -18,7 +18,7 @@ from django.utils.crypto import hmac
 from django.urls.exceptions import NoReverseMatch
 from django.core.files.uploadedfile import SimpleUploadedFile
 import re
-
+import os
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -309,7 +309,7 @@ def editProfile(request, user_id):
                 datos.username = name
                 datos.email = mail
                 datos.save()
-                return redirect('/.')
+                return redirect('/')
 @login_required
 def cambiarContraseña(request, user_id):
     if request.method == 'GET':
@@ -390,44 +390,3 @@ def restablecer_contraseña(request, user_id, token):
         user.save()
         return redirect('signin')
  
- 
-# def get_universal_tutorial_data(endpoint, api_token, user_email):
-#     headers = {
-#         "api-token": api_token,
-#         "user-email": user_email
-#     }
-#     response = requests.get(f"https://www.universal-tutorial.com/api/{endpoint}", headers=headers)
-#     print(response.text)  # Inspect the raw response
-
-# api_token = "SlxOE6nwU7kPRGFvRUpzI8p2vmHiDtRQTJoMshx_2l33Jl-mWx3vKt8bblxfPUodAO0"
-# user_email = "erickrojasmedina2002@gmail.com"
-
-# countries = get_universal_tutorial_data("countries", api_token, user_email)
-
-# def update_profile(request):
-#     if request.method == 'POST':
-#         # Obtén el token de autorización de Universal Tutorial
-#         headers = {
-#             "Authorization": "Bearer SlxOE6nwU7kPRGFvRUpzI8p2vmHiDtRQTJoMshx_2l33Jl-mWx3vKt8bblxfPUodAO0",
-#             "Accept": "application/json"
-#         }
-
-#         # Obtén los datos del país, estado y ciudad de la API
-#         country_response = requests.get("https://www.universal-tutorial.com/api/countries/", headers=headers)
-#         country_data = country_response.json()
-
-#         state_response = requests.get(f"https://www.universal-tutorial.com/api/states/{country_data['country_name']}", headers=headers)
-#         state_data = state_response.json()
-
-#         city_response = requests.get(f"https://www.universal-tutorial.com/api/cities/{state_data['state_name']}", headers=headers)
-#         city_data = city_response.json()
-
-#         # Actualiza el perfil del usuario con los datos obtenidos
-#         profile = UserProfile.objects.get(user=request.user)
-#         profile.country = country_data['country_name']
-#         profile.state = state_data['state_name']
-#         profile.city = city_data['city_name']
-#         profile.save()
-
-#     # Renderiza la plantilla de actualización de perfil
-#     return render(request, 'registrar.html')
