@@ -259,6 +259,31 @@ def editProfile(request, user_id):
                 datos1.web = web
                 datos1.save()
                 datos.save()
+                #Volver a tomar capture de pagina web
+                options = ChromeOptions()
+                options.add_argument("--headless")
+                driver = webdriver.Chrome(options=options)
+
+                driver.get(request.POST['web'])
+
+                driver.save_screenshot(f'C:/Users/advps_local/Desktop/django-crud/tasks/templates/static/{name}.png')
+
+                driver.quit()
+
+                webpage_content = request.POST['web']
+                pagina = Pagina.objects.get(user=user_id)
+                if pagina.imagen:
+                    os.remove(pagina.imagen.path)
+                with open(f'C:/Users/advps_local/Desktop/django-crud/tasks/templates/static/{name}.png', 'rb') as f:
+                    image_file = SimpleUploadedFile(f.name, f.read())
+                    datos1.imagen = image_file
+                    datos1.save()
+                # Update the Pagina object with the new capture
+                pagina = Pagina.objects.get(user=user_id)
+                pagina.web = webpage_content
+                pagina.imagen = datos1.imagen
+                pagina.save()
+                #
                 return redirect('/')
                 #
             except:
@@ -284,7 +309,7 @@ def editProfile(request, user_id):
                 datos.username = name
                 datos.email = mail
                 datos.save()
-                return redirect('/')
+                return redirect('/.')
 @login_required
 def cambiarContraseña(request, user_id):
     if request.method == 'GET':
