@@ -138,7 +138,7 @@ def signip(request):
         })
        else:
            login(request, user)
-           return redirect('tasks')
+           return redirect('/')
 
 @login_required       
 def create_task(request):
