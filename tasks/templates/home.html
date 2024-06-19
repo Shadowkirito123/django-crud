@@ -36,6 +36,24 @@
                 </section>
             </div>
         </div>
+
+        <div>
+            <ul class="list-group">
+                {% for task in form %}
+                        <header class="d-flex justify-content-between">
+                            <h1 class="fw-bold">{{task.title}}</h1>
+                            <p>Usuario: {{task.user.username}}</p>
+                        </header>
+
+                        <p>{{task.description}}</p>
+
+                        {% load static %}
+                        <p><img src="{{ task.imagen.url}}" alt="Imagen" style="width: 100px; height: 100px;"></p>
+                        <p>{{task.datecompleted|date:"M j Y:i"}}</p>
+    
+                {%endfor%}
+        </ul>
+        </div>
         {% endif %}
     </main>
 {% endblock %}

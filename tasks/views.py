@@ -20,7 +20,10 @@ import re
 import os
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    form = Task.objects.all()
+    return render(request, 'home.html',{
+        'form': form
+    })
 
 def signup(request):
     if request.method == 'GET':
