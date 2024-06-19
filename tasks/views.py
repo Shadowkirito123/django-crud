@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-from .forms import TaskForm
+from .forms import TaskForm, NuevoFormImg
 from .models import Task, Tokens, Pagina
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -391,3 +391,15 @@ def restablecer_contraseña(request, user_id, token):
         user.save()
         return redirect('signin')
 
+@login_required
+def subirIMG(request):
+    if request.method == 'GET':
+        return render(request, 'subirIMG.html',{
+            'form': NuevoFormImg
+        })
+    else:
+        form = NuevoFormImg(request.POST, request.FILES)
+        new_form = form.save(commit=False)
+        new_form.user = request.user
+        new_form.save()
+        return redirect('home')

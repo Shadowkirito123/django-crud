@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="color: white;">Pagina para subir algo</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h5 style="color: white;">{{form.as_p}}</h5>
+    <button type="submit">
+        Subir
+    </button>
+</form>
+{% endblock %}

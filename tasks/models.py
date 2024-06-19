@@ -25,3 +25,8 @@ class Pagina(models.Model):
     
     def __str__(self):
         return self.web
+
+class Imagenes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    imagen = models.ImageField(upload_to='static/', default=None)
