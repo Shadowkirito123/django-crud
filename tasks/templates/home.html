@@ -48,7 +48,7 @@
                         <p>{{task.description}}</p>
 
                         {% load static %}
-                        <p><img src="{{ task.imagen.url}}" alt="Imagen" style="width: 100px; height: 100px;"></p>
+                        <p><img src="{{task.imagen}}" alt="Imagen" style="width: 100px; height: 100px;"></p>
                         <p>{{task.datecompleted|date:"M j Y:i"}}</p>
     
                 {%endfor%}
