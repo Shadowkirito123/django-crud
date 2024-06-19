@@ -30,15 +30,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="/createtask"><i class="fas fa-plus"></i> Crear Tarea</a>
+                    <a class="nav-link" style="color: white;" href="/createtask"><i class="fas fa-plus"></i> Crear publicacion</a>
                 </li>
     
                 <li class="nav-item">
                     <a class="nav-link" style="color: white;" href="/tasks"><i class="fas fa-tasks"></i> Tareas</a>   
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="{% url 'subir' %}"><i class="fas fa-paperclip"></i> Subir</a>   
                 </li>
 
                 <li class="nav-item">
@@ -50,8 +46,9 @@
                 </li>
 
                 <li class="nav-item text-light">
-                    <h4 class="badge bg-light text-dark"><i class="fas fa-user"></i> Usuario: {{user.username}}</h4>
+                    <h4 class="badge bg-light text-dark"><i class="fas fa-user"></i> {{user.username}}</h4>
                 </li>
+
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link" style="color: white;" href="/signup"><i class="fas fa-user-plus"></i> Registrarse</a> 

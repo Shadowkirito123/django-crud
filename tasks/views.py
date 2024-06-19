@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-from .forms import TaskForm, NuevoFormImg
+from .forms import TaskForm
 from .models import Task, Tokens, Pagina
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -144,19 +144,26 @@ def signip(request):
 def create_task(request):
     if request.method == 'GET':
         return render(request, 'create_task.html', {
-        'form': TaskForm
-    })
+            'form': TaskForm(),
+        })
     else:
         try:
-            form = TaskForm(request.POST)
-            new_task = form.save(commit=False)
-            new_task.user = request.user
-            new_task.save()
-            return redirect('tasks')
+            #Para subir tareas
+            form = TaskForm(request.POST, request.FILES)
+            if form.is_valid():
+                new_task = form.save(commit=False)
+                new_task.user = request.user
+                new_task.save()
+                return redirect('tasks')
+            else:
+                return render(request, 'create_task.html',{
+                    'form': form,
+                    'error': 'Por favor revise los errores en el formulario'
+                })
         except ValueError:
             return render(request, 'create_task.html',{
-                'form': TaskForm,
-                'error': 'Por favor valide la data'
+                'form': TaskForm(),
+                'error': 'Error interno, por favor intente de nuevo'
             })
 
 @login_required            
@@ -390,16 +397,3 @@ def restablecer_contraseña(request, user_id, token):
         user.set_password(request.POST['password1'])
         user.save()
         return redirect('signin')
-
-@login_required
-def subirIMG(request):
-    if request.method == 'GET':
-        return render(request, 'subirIMG.html',{
-            'form': NuevoFormImg
-        })
-    else:
-        form = NuevoFormImg(request.POST, request.FILES)
-        new_form = form.save(commit=False)
-        new_form.user = request.user
-        new_form.save()
-        return redirect('home')

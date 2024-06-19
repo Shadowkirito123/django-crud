@@ -15,11 +15,15 @@
                                    <h1 class="fw-bold text-success">{{task.title}}</h1>
                                    {% else %}
                                    <h1 class="fw-bold">{{task.title}}</h1>
+                                   
                                    {% endif %}
                                    <p>Usuario: {{task.user.username}}</p>
                               </header>
 
                               <p>{{task.description}}</p>
+
+                              {% load static %}
+                              <p><img src="{{ task.imagen.url}}" alt="Imagen" style="width: 100px; height: 100px;"></p>
                               
                               <p>{% if task.important == True %} Es Importante {% else %} No es importante {% endif %}</p>
                               <p>{{task.datecompleted|date:"M j Y:i"}}</p>

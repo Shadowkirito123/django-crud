@@ -10,6 +10,7 @@ class Task(models.Model):
     datecompleted = models.DateTimeField(null=True, blank=True)
     important = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='static/', default=None)
     
     def __str__(self):
         return self.title + ' - ' + self.user.username
@@ -25,8 +26,3 @@ class Pagina(models.Model):
     
     def __str__(self):
         return self.web
-
-class Imagenes(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
-    imagen = models.ImageField(upload_to='static/', default=None)

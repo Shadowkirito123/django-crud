@@ -4,12 +4,11 @@
  <main class="container">
     <div class="row">
         <div class="col-md-4 offset-md-4 mt-5">
-            <h1 class="text-secondary">Detalle de la tarea</h1>
-            {{task.title}}
+            <h1 style="color: white;">Detalle de la tarea</h1>
 
             {{error}}
 
-            <form method="POST">
+            <form method="POST" style="color: white;">
                 {% csrf_token %}
                 {{form.as_p}}
                 <button class="btn btn-primary">
