@@ -26,3 +26,10 @@ class Pagina(models.Model):
     
     def __str__(self):
         return self.web
+
+class Colores(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    color_fondo = models.CharField(max_length=7)
+    
+    def __str__(self):
+        return self.color_fondo

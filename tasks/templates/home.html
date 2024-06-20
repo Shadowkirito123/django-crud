@@ -36,10 +36,12 @@
                 </section>
             </div>
         </div>
+        
 
-        <div>
-            <ul class="list-group">
-                {% for task in form %}
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                     <ul class="list-group" style="background-color: white;">
+                        {% for task in form %}
                         <header class="d-flex justify-content-between">
                             <h1 class="fw-bold">{{task.title}}</h1>
                             <p>Usuario: {{task.user.username}}</p>
@@ -51,9 +53,12 @@
                         <p><img src="{{task.imagen}}" alt="Imagen" style="width: 100px; height: 100px;"></p>
                         <p>{{task.datecompleted|date:"M j Y:i"}}</p>
     
-                {%endfor%}
-        </ul>
-        </div>
+                        {%endfor%}
+                     </ul>
+                     
+                </div>
+            </div>
+
         {% endif %}
     </main>
 {% endblock %}

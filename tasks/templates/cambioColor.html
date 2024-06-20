@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'cambio' user.id %}" method="POST">
+    <h5><input type="hidden" name="id"></h5>
+    {% csrf_token %}
+    <h1 style="color: white;">Cambio de colores</h1>
+    <p style="color: white;"><label for="color">Cambiar el color de la pagina:</label>
+    <input type="color" name="color" id="color"></p>
+    <button>
+        Guardar
+    </button>
+</form>
+{{form.color_fondo}}
+{% endblock %}

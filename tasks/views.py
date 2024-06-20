@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import TaskForm
-from .models import Task, Tokens, Pagina
+from .models import Task, Tokens, Pagina, Colores
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -83,17 +83,27 @@ def signup(request):
                     try:
                         #Captura de sitio web
                         
+                        # Set up ChromeOptions
                         options = ChromeOptions()
                         options.add_argument("--headless")
+
+                        # Create a new instance of the Chrome WebDriver
                         driver = webdriver.Chrome(options=options)
 
-                        driver.get(request.POST['web'])
+                        # Navigate to the webpage
+                        webpage_url = request.POST['web']
+                        driver.get(webpage_url)
 
-                        driver.save_screenshot(f'C:/Users/advps_local/Documents/nuevo repositorio/django-crud/tasks/templates/static/{username1}.png')
+                        # Take a screenshot of the webpage
+                        screenshot_filename = f'C:/Users/Usuario/Documents/Cms/django-crud/static/{username1}.png'
+                        driver.save_screenshot(screenshot_filename)
 
+                        # Quit the WebDriver
                         driver.quit()
-                        webpage_content = request.POST['web']
-                        with open(f'C:/Users/advps_local/Documents/nuevo repositorio/django-crud/tasks/templates/static/{username1}.png', 'rb') as f:
+
+                        # Create a Django model instance
+                        webpage_content = webpage_url
+                        with open(screenshot_filename, 'rb') as f:
                             image_file = SimpleUploadedFile(f.name, f.read())
                         Pagina.objects.create(user=user, web=webpage_content, imagen=image_file)
                     except:
@@ -275,7 +285,7 @@ def editProfile(request, user_id):
 
                 driver.get(request.POST['web'])
 
-                driver.save_screenshot(f'C:/Users/advps_local/Documents/nuevo repositorio/django-crud/tasks/templates/static/{name}.png')
+                driver.save_screenshot(f'C:/Users/Usuario/Documents/Cms/django-crud/static/{name}.png')
 
                 driver.quit()
 
@@ -283,7 +293,7 @@ def editProfile(request, user_id):
                 pagina = Pagina.objects.get(user=user_id)
                 if pagina.imagen:
                     os.remove(pagina.imagen.path)
-                with open(f'C:/Users/advps_local/Documents/nuevo repositorio/django-crud/tasks/templates/static/{name}.png', 'rb') as f:
+                with open(f'C:/Users/Usuario/Documents/Cms/django-crud/static/{name}.png', 'rb') as f:
                     image_file = SimpleUploadedFile(f.name, f.read())
                     datos1.imagen = image_file
                     datos1.save()
@@ -400,3 +410,16 @@ def restablecer_contraseña(request, user_id, token):
         user.set_password(request.POST['password1'])
         user.save()
         return redirect('signin')
+    
+def cambio(request, user_id):
+    if request.method == 'GET':
+        form = Colores.objects.filter(id=user_id)
+        return render(request, 'cambioColor.html',{
+            'form': form
+        })
+    else:
+        color = request.POST['color']
+        new_color = Colores(user=request.user, color_fondo=color)
+        new_color.save()
+        return redirect('/')
+        
