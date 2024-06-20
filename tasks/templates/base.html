@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body style="background-color: #2A2F32;">
-    <nav class="navbar navbar-expand-lg" style="background-color: #6f42c1;" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg" style="background-color: #0d6efd;" data-bs-theme="dark">
         <div class="container">
             
-          <a class="navbar-brand" style="color: white;" href="/">Django App</a>
+          <a class="navbar-brand" style="color: black;" href="/">Django App</a>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,37 +21,40 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="/"><i class="fas fa-home"></i> Home</a>
+                    <a class="nav-link" style="color: black;" href="/"><i class="fas fa-home"></i> Home</a>
                 </li>
                 
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="/createtask"><i class="fas fa-plus"></i> Crear publicacion</a>
+                    <a class="nav-link" style="color: black;" href="/createtask"><i class="fas fa-plus"></i> Crear publicacion</a>
                 </li>
     
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="/tasks"><i class="fas fa-tasks"></i> Tareas</a>   
+                    <a class="nav-link" style="color: black;" href="/tasks"><i class="fas fa-tasks"></i> Tareas</a>   
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="{% url 'task_complete' %}"><i class="fas fa-check"></i> Tareas completadas</a>   
+                    <a class="nav-link" style="color: black;" href="{% url 'task_complete' %}"><i class="fas fa-check"></i> Tareas completadas</a>   
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="/logout"><i class="fas fa-sign-out-alt"></i> Salir</a>
+                    <a class="nav-link" style="color: black;" href="/logout"><i class="fas fa-sign-out-alt"></i> Salir</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="{% url 'usuario' user.id %}"><i class="fas fa-user"></i> {{user.username}}</a>   
+                    <a class="nav-link" style="background-color: white; color: black; border-radius: 15px" href="{% url 'usuario' user.id %}">
+                        <strong>Usuario:</strong> {{user.username}} <i class="fa-solid fa-hand-pointer"></i>
+                    </a>
                 </li>
+                
 
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="/signup"><i class="fas fa-user-plus"></i> Registrarse</a> 
+                    <a class="nav-link" style="color: black;" href="/signup"> Registrarse</a> 
                  </li>
     
                  <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="/signin"><i class="fas fa-sign-in-alt"></i> Iniciar sesion</a> 
+                    <a class="nav-link" style="color: black;" href="/signin">Iniciar sesion</a> 
                  </li>
                 {% endif %}
     
