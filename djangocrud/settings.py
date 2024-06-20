@@ -108,7 +108,7 @@ DATABASES = {
     # }
     {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'BaseDeDjango',
+            'NAME': 'BaseDeDatosDjango1',
             'USER': 'root',
             'PASSWORD': '',
             'HOST': 'localhost',

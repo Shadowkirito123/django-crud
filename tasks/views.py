@@ -95,7 +95,7 @@ def signup(request):
                         driver.get(webpage_url)
 
                         # Take a screenshot of the webpage
-                        screenshot_filename = f'C:/Users/Usuario/Documents/Cms/django-crud/static/{username1}.png'
+                        screenshot_filename = f'C:/Users/advps_local/Documents/nuevo repositorio/django-crud/static/{username1}.png'
                         driver.save_screenshot(screenshot_filename)
 
                         # Quit the WebDriver
@@ -285,7 +285,7 @@ def editProfile(request, user_id):
 
                 driver.get(request.POST['web'])
 
-                driver.save_screenshot(f'C:/Users/Usuario/Documents/Cms/django-crud/static/{name}.png')
+                driver.save_screenshot(f'C:/Users/advps_local/Documents/nuevo repositorio/django-crud/static/{name}.png')
 
                 driver.quit()
 
@@ -293,7 +293,7 @@ def editProfile(request, user_id):
                 pagina = Pagina.objects.get(user=user_id)
                 if pagina.imagen:
                     os.remove(pagina.imagen.path)
-                with open(f'C:/Users/Usuario/Documents/Cms/django-crud/static/{name}.png', 'rb') as f:
+                with open(f'C:/Users/advps_local/Documents/nuevo repositorio/django-crud/static/{name}.png', 'rb') as f:
                     image_file = SimpleUploadedFile(f.name, f.read())
                     datos1.imagen = image_file
                     datos1.save()
@@ -411,15 +411,18 @@ def restablecer_contraseña(request, user_id, token):
         user.save()
         return redirect('signin')
     
-def cambio(request, user_id):
+def cambio(request):
     if request.method == 'GET':
-        form = Colores.objects.filter(id=user_id)
-        return render(request, 'cambioColor.html',{
-            'form': form
-        })
+        return render(request, 'cambioColor.html')
     else:
         color = request.POST['color']
         new_color = Colores(user=request.user, color_fondo=color)
         new_color.save()
         return redirect('/')
-        
+
+def obtenercolor(request):
+        hola = Colores.objects.get(user = request.user)
+        color = hola.color_fondo
+        return render(request, 'obtenercolor.html', {
+            'color': color
+        })

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action="{% url 'cambio' user.id %}" method="POST">
+<form action="{% url 'cambio'%}" method="POST">
     <h5><input type="hidden" name="id"></h5>
     {% csrf_token %}
     <h1 style="color: white;">Cambio de colores</h1>

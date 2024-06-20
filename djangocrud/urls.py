@@ -34,7 +34,8 @@ urlpatterns = [
     path('usuario/<int:user_id>/cambiarContraseña', views.cambiarContraseña, name='cambiarContraseña'),
     path('usuario/cancelar', views.regresarAlInicio, name='regreso'),
     path('usuario/<int:user_id>/restablacerClave/<str:token>/', views.restablecer_contraseña, name='restablecer_contraseña'),
-    path('cambio/<int:user_id>', views.cambio, name='cambio')
+    path('cambio/', views.cambio, name='cambio'),
+    path('obtener/', views.obtenercolor, name='obtener')
     # path('ubicacion/', views.update_profile, name='update_profile'),
 
     ]
