@@ -10,23 +10,24 @@
     }
 </style>
 <main class="container py-5">
-    <section class="card card-body bg-transparent border-white rounded-border" >
-        <h1 class="text-center text-white">Cambio de contraseña</h1>
-        <p class="text-white">A continuacion se enviara un correo electronico a su correo con una llave la cual sera el link para poder ejecutar el cambio de contraseña. Si desea continuar haz click en el boton de enviar si quiere cambiar su contraseña, si no haz click en cancelar</p>
+    <section class="card card-body  border-white rounded-border" >
+        <h1 class="text-center ">Cambio de contraseña</h1>
+        <p>A continuacion se enviara un correo electronico a su correo con una llave la cual sera el link para poder ejecutar el cambio de contraseña. Si desea continuar haz click en el boton de enviar si quiere cambiar su contraseña, si no haz click en cancelar</p>
+        <div class="d-flex justify-content-center mt-3"> 
+            <form action="{% url 'cambiarContraseña' user.id %}" method="POST" class="mr-2">
+                {% csrf_token %}
+                <button class="btn btn-primary">
+                    <i class="fas fa-envelope"></i> Enviar
+                </button>
+            </form>
+            <form action="{% url 'regreso'%}" method="POST">
+                {% csrf_token %}
+                <button class="btn btn-danger">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </form>
+        </div>
     </section>
-    <div class="d-flex justify-content-center mt-3"> 
-        <form action="{% url 'cambiarContraseña' user.id %}" method="POST" class="mr-2">
-            {% csrf_token %}
-            <button class="btn btn-primary">
-                <i class="fas fa-envelope"></i> Enviar
-            </button>
-        </form>
-        <form action="{% url 'regreso'%}" method="POST">
-            {% csrf_token %}
-            <button class="btn btn-danger">
-                <i class="fas fa-times"></i> Cancelar
-            </button>
-        </form>
-    </div>
+    
 </main>
 {% endblock %}
