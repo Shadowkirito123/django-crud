@@ -5,7 +5,7 @@
     <main class="container">
         <div class="row justify-content-center">
             <section class="col-md-4 mt-5">
-            <form action="" method="POST" class="card card-body bg-dark text-white border-white" style="border-radius: 15px;">
+            <form action="" method="POST" class="card card-body  text-blackborder-black" style=" background-color:#0d6efd; border-radius: 15px;">
                     {% if error %}
                     <div id="errorAlert" class="alert alert-danger" role="alert">
                     <i class="fas fa-times"></i> {{ error }}
@@ -13,10 +13,10 @@
                     {% endif %}
                     {% csrf_token %}
                     
-                    <h1 class="text-center mb-4">Iniciar sesión</h1>
+                    <h1 class="text-center mb-4"><strong>Iniciar sesión</strong></h1>
             
                     <div class="mb-3">
-                        <label for="username" class="form-label">Nombre de usuario:</label>
+                        <label for="username" class="form-label"><strong>Nombre de usuario:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Escribe tu nombre de usuario" required>
@@ -24,14 +24,14 @@
                     </div>
             
                     <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña:</label>
+                        <label for="password" class="form-label"><strong>Contraseña:</strong></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             <input type="password" name="password" id="password" class="form-control" placeholder="Escribe tu contraseña" required>
                         </div>
                     </div>
             
-                    <button class="btn btn-primary w-100" style='background-color: #6f42c1; border-color: black;'>
+                    <button class="btn btn-primary w-100" style='background-color: black; border-color: black;'>
                         Ingresar
                     </button>
                 </form>
