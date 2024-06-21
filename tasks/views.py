@@ -426,3 +426,6 @@ def obtenercolor(request):
         return render(request, 'obtenercolor.html', {
             'color': color
         })
+
+def sobrenosotros(request):
+    return render(request, 'sobrenosotros.html')
