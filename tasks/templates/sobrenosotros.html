@@ -1,7 +1,44 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content%}
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Agrega los enlaces a los archivos CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+    <body>
+        <div class="container mt-5 ">
+            <h1 class="text-center" style="color: #20c997">UCI Innovations: Innovando </h1>
+            <div class="row">
+                <div class="col-md-6" >
+                    <h2 class='mt-5' style="color: #20c997;">Acerca de Nosotros</h2>
+                    <p class='text-white'>UCI Innovations es una empresa líder en el desarrollo y diseño de sitios web. Nuestro equipo apasionado está compuesto por expertos en desarrollo web, diseñadores creativos y estrategas digitales. Nos enorgullece ofrecer soluciones personalizadas y vanguardistas para nuestros clientes.</p>
+                </div>
+                <div class="col-md-7 offset-md-4">
+                    <h2 class='mt-5' style="color: #20c997">Nuestros Servicios</h2>
+                    <ul class='text-white'>
+                        <li class='mt-4'><strong>Diseño Web Personalizado:</strong> Creamos sitios web atractivos y funcionales que reflejan la identidad de tu marca. Desde blogs hasta tiendas en línea, nos adaptamos a tus necesidades.</li>
+                        <li class='mt-4'><strong>Optimización de SEO:</strong> Maximizamos la visibilidad de tu sitio en los motores de búsqueda para atraer más tráfico orgánico.</li>
+                        <li class='mt-4'><strong>Desarrollo de Plugins y Temas:</strong> Creamos extensiones personalizadas para WordPress que mejoran la funcionalidad y la estética de tu sitio.</li>
+                        <li class='mt-4'><strong>Mantenimiento y Soporte:</strong> Ofrecemos actualizaciones regulares, copias de seguridad y solución de problemas para garantizar que tu sitio funcione sin problemas.</li>
+                    </ul>
+                    
+                </div>
+            </div>
+            <div class="mt-4">
+                <h2 class='text-center'  style="color: #20c997;">Nuestra Misión</h2>
+                <p class='mt-4 text-white' >En WP Innovations, creemos que cada sitio web tiene el potencial de ser excepcional. Nuestro objetivo es impulsar la innovación en el mundo , brindando soluciones creativas y eficientes a nuestros clientes.</p>
+            </div>
+        </div>
+        <!-- Agrega los enlaces a los archivos JavaScript de Bootstrap (opcional) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
 
 
 {% endblock %}
