@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from tasks import views
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +36,6 @@ urlpatterns = [
     path('usuario/<int:user_id>/restablacerClave/<str:token>/', views.restablecer_contraseña, name='restablecer_contraseña'),
     path('cambio/', views.cambio, name='cambio'),
     path('obtener/', views.obtenercolor, name='obtener'),
-    path('sobrenosotros/', views.sobrenosotros, name='sobrenosotros')
+    re_path(r'^ckeditor/', include('ckeditor_uploader.urls'))
     # path('ubicacion/', views.update_profile, name='update_profile'),
     ]

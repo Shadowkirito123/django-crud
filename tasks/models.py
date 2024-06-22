@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
 class Task(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
+    description = RichTextField(blank=True, null=True)
+    # description = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     datecompleted = models.DateTimeField(null=True, blank=True)
     important = models.BooleanField(default=False)
