@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader'
     ]
 
+CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/'
+
 LANGUAGES = [
     ("en", "English"),
     ("ko", "Korean"),
@@ -182,7 +184,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'pruebadedjango46@gmail.com'
 EMAIL_HOST_PASSWORD = 'luhvxgshgupfbefi'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = 'pillow'
 
 CKEDITOR_CONFIGS = {
     'default': {
