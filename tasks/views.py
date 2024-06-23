@@ -426,3 +426,6 @@ def obtenercolor(request):
         'color': color,
         'form': TaskForm
     })
+    
+def sobrenosotros_view(request):
+    return render(request, 'sobrenosotros.html')

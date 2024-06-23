@@ -36,6 +36,7 @@ urlpatterns = [
     path('usuario/<int:user_id>/restablacerClave/<str:token>/', views.restablecer_contraseña, name='restablecer_contraseña'),
     path('cambio/', views.cambio, name='cambio'),
     path('obtener/', views.obtenercolor, name='obtener'),
-    re_path(r'^ckeditor/', include('ckeditor_uploader.urls'))
+    re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    path('sobrenosotros/',views.sobrenosotros_view, name='sobrenosotros')
     # path('ubicacion/', views.update_profile, name='update_profile'),
     ]
