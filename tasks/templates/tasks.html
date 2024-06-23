@@ -20,7 +20,7 @@
                                    <p>Usuario: {{task.user.username}}</p>
                               </header>
 
-                              <p>{{task.description}}</p>
+                              <p>{{task.description|safe}}</p>
 
                               {% load static %}
                               <p><img src="{{ task.imagen.url}}" alt="Imagen" style="width: 100px; height: 100px;"></p>

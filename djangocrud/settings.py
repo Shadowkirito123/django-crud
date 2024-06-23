@@ -181,8 +181,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'pruebadedjango46@gmail.com'
 EMAIL_HOST_PASSWORD = 'luhvxgshgupfbefi'
-<<<<<<< HEAD
-=======
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
@@ -191,4 +189,3 @@ CKEDITOR_CONFIGS = {
         
     },
 }
->>>>>>> 9bc9b7997fb4561956bdb6088265a6da7b27fd74
