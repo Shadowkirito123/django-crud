@@ -423,5 +423,9 @@ def cambio(request):
 def obtenercolor(request):
     color = Colores.objects.get(user = request.user)
     return render(request, 'obtenercolor.html',{
-        'color': color
+        'color': color,
+        'form': TaskForm
     })
+    
+def sobrenosotros_view(request):
+    return render(request, 'sobrenosotros.html')
