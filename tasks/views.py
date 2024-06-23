@@ -412,13 +412,13 @@ def restablecer_contraseña(request, user_id, token):
         return redirect('signin')
     
 def cambio(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render(request, 'cambioColor.html')
+    else:
         color = request.POST['color']
         new_color = Colores(user=request.user, color_fondo=color)
         new_color.save()
         return redirect('/')
-    else:
-        pass
     
 def obtenercolor(request):
     color = Colores.objects.get(user = request.user)
