@@ -8,9 +8,10 @@
 
             {{error}}
 
-            <form method="POST" >  <h1 class="text-center" style="color: black;">Detalle de la tarea</h1>
-  
+<form method="POST" >  <h1 class="text-center" style="color: black;">Detalle de la tarea</h1>
+  {% csrf_token %}
   {{ form.as_p }}
+  {{form.media}}
 
   <div class="d-flex justify-content-between mt-5">  <button class="btn btn-primary">Update</button>
     <form action="{% url 'complete_task' task.id %}" method="POST">
