@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django_countries',
     'debug_toolbar',
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
     ]
 
 CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/'
@@ -189,6 +189,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_ALLOW_NONSTAFF_UPLOAD = True
 
 CKEDITOR_CONFIGS = {
     'default': {

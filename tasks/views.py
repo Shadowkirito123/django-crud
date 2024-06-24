@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-from .forms import TaskForm
+from .forms import TaskForm, Public
 from .models import Task, Tokens, Pagina, Colores
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -428,3 +428,11 @@ def obtenercolor(request):
     
 def sobrenosotros_view(request):
     return render(request, 'sobrenosotros.html')
+
+def verpublicacion(request):
+    if request.method == 'GET':
+        task = Task.objects.all()
+        form = Public(request.POST,instance=task)
+        return render(request, 'publicacion.html',{
+            'form': form
+        })

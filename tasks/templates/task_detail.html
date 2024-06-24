@@ -14,14 +14,17 @@
   {{form.media}}
 
   <div class="d-flex justify-content-between mt-5">  <button class="btn btn-primary">Update</button>
+
     <form action="{% url 'complete_task' task.id %}" method="POST">
-      
+      {% csrf_token %}
       <button class="btn btn-secondary">Complete</button>
     </form>
+
     <form action="{% url 'delete_task' task.id %}" method="POST">
-      
+      {% csrf_token %}
       <button class="btn btn-danger">Delete</button>
     </form>
+
   </div>
 </form>
 
