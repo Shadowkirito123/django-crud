@@ -451,3 +451,4 @@ def mostrarcomentario(request):
     return render(request, 'obtenepublicacion.html',{
         'tarea':tarea
     })
+    
