@@ -34,3 +34,11 @@ class Colores(models.Model):
     
     def __str__(self):
         return self.color_fondo
+    
+class Comentarios(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.TextField(blank=True)
+    task = models.ForeignKey(Task, on_delete=models.SET_NULL, null=True, blank=True, default=None)
+
+    def __str__(self) :
+        return self.comment

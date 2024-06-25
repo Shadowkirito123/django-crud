@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import TaskForm, Public
-from .models import Task, Tokens, Pagina, Colores
+from .models import Task, Tokens, Pagina, Colores, Comentarios
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -421,7 +421,7 @@ def cambio(request):
         return redirect('/')
     
 def obtenercolor(request):
-    color = Colores.objects.get(user = request.user)
+    color = Task.objects.all()
     return render(request, 'obtenercolor.html',{
         'color': color
     })
@@ -429,10 +429,25 @@ def obtenercolor(request):
 def sobrenosotros_view(request):
     return render(request, 'sobrenosotros.html')
 
-def verpublicacion(request):
+def verpublicacion(request, task_id):
     if request.method == 'GET':
-        task = Task.objects.all()
-        form = Public(request.POST,instance=task)
-        return render(request, 'publicacion.html',{
-            'form': form
+        task = get_object_or_404(Task, pk=task_id)
+        return render (request, 'obtenepublicacion.html', {
+            'task':task
         })
+
+def comentarpublicion(request, task_id):
+    if request.method == 'GET':
+        return render(request, 'obtenepublicacion.html')
+    else:
+        comentario = request.POST['comentario']
+        tarea = get_object_or_404(Task, pk=task_id)
+        new_comentario = Comentarios(user = request.user, comment = comentario, task = tarea)
+        new_comentario.save()
+        return redirect('/')
+
+def mostrarcomentario(request):
+    tarea = Comentarios.objects.get(task = request.POST['id'])
+    return render(request, 'obtenepublicacion.html',{
+        'tarea':tarea
+    })

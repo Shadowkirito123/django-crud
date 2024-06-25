@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'prueba' %}" method="POST">
+     {% csrf_token %}
+     <h5><label for="comentario">Comentarios</label></h5>
+     <h5><input type="text" name="comentario" id="comentario"></h5>
+     <button>
+          Enviar
+     </button>
+</form>
+
+{% endblock %}

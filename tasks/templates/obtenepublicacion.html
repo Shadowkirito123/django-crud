@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<input type="hidden" id="id" name="id" value="{{task.id}}">
+<ul class="list-group list-group-item">
+              <header class="d-flex justify-content-between">
+                   {% if task.important %}
+                   <h1 class="fw-bold text-success">{{task.title}}</h1>
+                   {% else %}
+                   <h1 class="fw-bold">{{task.title}}</h1>
+                   
+                   {% endif %}
+                   <p>Usuario: {{task.user.username}}</p>
+              </header>
+
+              <p>{{task.description|safe}}</p>
+              
+</ul>
+{{tarea}}
+
+
+
+<form action="{% url 'comentar' task.id %}" method="POST">
+     {% csrf_token %}
+     <h5><label for="comentario">Comentarios</label></h5>
+     <h5><input type="text" name="comentario" id="comentario"></h5>
+     <button>
+          Enviar
+     </button>
+</form>
+
+{% endblock %}

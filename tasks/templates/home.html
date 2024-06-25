@@ -62,13 +62,19 @@
             <div class="col-md-6 offset-md-3">
                  <ul class="list-group" style="background-color: white;">
                     {% for task in form %}
-                    <header class="d-flex justify-content-between">
-                        <h1 class="fw-bold">{{task.title}}</h1>
-                        <p>Usuario: {{task.user.username}}</p>
-                    </header>
-
-                    <p>{{task.description|safe}}</p>
-
+                    <a href="{% url 'ver' task.id %}"class="list-group-item"> 
+                        <header class="d-flex justify-content-between">
+                             {% if task.important %}
+                             <h1 class="fw-bold text-success">{{task.title}}</h1>
+                             {% else %}
+                             <h1 class="fw-bold">{{task.title}}</h1>
+                             
+                             {% endif %}
+                             <p>Usuario: {{task.user.username}}</p>
+                        </header>
+      
+                        <p>{{task.description|safe}}</p>
+              </a>
 
                     {%endfor%}
                  </ul>
@@ -156,12 +162,13 @@
                         <header class="d-flex justify-content-between">
                             <h1 class="fw-bold">{{task.title}}</h1>
                             <p>Usuario: {{task.user.username}}</p>
+                            
                         </header>
 
                         <p>{{task.description|safe}}</p>
-
     
                         {%endfor%}
+                        
                      </ul>
                      
                 </div>
