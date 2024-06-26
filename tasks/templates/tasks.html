@@ -4,7 +4,7 @@
 <main class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <h1 class="text-center py-5" style="color: #20c997;">Tareas pendientes</h1>
+      <h1 class="text-center py-5" style="color: #20c997;">Mis publicaciones</h1>
 
       <ul class="list-group" style="border: none; border-radius: 4px;">  {% for task in tasks %}
           <li class="list-group-item mb-3" style="color: black;">  <a href="{% url 'task detail' task.id %}" style="color: black; text-decoration: none;">  <header class="d-flex justify-content-between">
