@@ -6,7 +6,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ZenhBwPWqEJEGVz0iIWQoE4RnJx2v+kCzE/Q8f/T/" crossorigin="anonymous">
   <style>
     .task-container {
@@ -17,22 +16,8 @@
       max-width: 200%; 
     }
 
-              <p>{{task.description|safe}}</p>
-              
-</ul>
-
-
 <h5 style="color: white;">Comentarios:</h5>
 <ul style="color: white;">
-     {% if comentarios %}
-         {% for comentario in comentarios %}
-             <li>{{ comentario.comment }} (usuario: {{comentario.user.username}})</li>
-         {% endfor %}
-     {% else %}
-          <li>No hay comentarios para esta tarea.</li>
-     {% endif %}
-     </ul>
-
     .task-description {
       margin-top: 3px;
     }
@@ -69,5 +54,14 @@
      </div>
      <button type="submit" class="btn btn-dark mt-3">Enviar</button>  </form>
  </div>
- 
+ <p>{{task.description|safe}}</p>
+ {% if comentarios %}
+         {% for comentario in comentarios %}
+             <li>{{ comentario.comment }} (usuario: {{comentario.user.username}})</li>
+         {% endfor %}
+     {% else %}
+          <li>No hay comentarios para esta tarea.</li>
+     {% endif %}
+     </ul>
+
 {% endblock %}

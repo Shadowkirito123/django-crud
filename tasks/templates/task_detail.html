@@ -3,30 +3,24 @@
 {% block content %}
  <main class="container" >
     <div class="row">
+      <h1 class="text-center" style="color: #20c997;">Detalle de la publicacion</h1>
         <div class="col-md-4 offset-md-4 mt-5" style="color: black; background-color: white; border-radius: 10px;">
-            
-
             {{error}}
-
-<form method="POST" >  <h1 class="text-center" style="color: black;">Detalle de la publicacion</h1>
-  {% csrf_token %}
-  {{ form.as_p }}
-  {{form.media}}
-
-  <div class="d-flex justify-content-between mt-5">  <button class="btn btn-primary">Update</button>
-
-    <form action="{% url 'complete_task' task.id %}" method="POST">
-      {% csrf_token %}
-      <button class="btn btn-secondary">Complete</button>
-    </form>
-
-    <form action="{% url 'delete_task' task.id %}" method="POST">
-      {% csrf_token %}
-      <button class="btn btn-danger">Delete</button>
-    </form>
-
-  </div>
-</form>
+            
+            <form method="POST">
+              {% csrf_token %}
+              {{ form.as_p }}
+              {{ form.media }}
+            
+              <div class="d-flex justify-content-between mt-5">
+                <button class="btn btn-primary mr-2">Update</button>
+                <form action="{% url 'delete_task' task.id %}" method="POST">
+                  {% csrf_token %}
+                  <button class="btn btn-danger">Delete</button>
+                </form>
+              </div>
+            </form>
+            
 
         </div>
     </div>

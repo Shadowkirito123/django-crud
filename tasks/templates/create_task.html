@@ -3,8 +3,9 @@
 {% block content %}
     <main class="container">
         <div class="row">
-            <div class="col-md-4 offset-md-4">
-                <h1 class='text-white'>Crear una publicacion</h1>
+            <h1 class='text-center' style='color: #20c997'>Crear una publicacion</h1>
+            <div class="col-md-6 offset-md-3">
+                
                 <form action="/createtask/" method="POST" class="card card-body mt-5" enctype="multipart/form-data" >
                     
                     {{error}}
@@ -12,7 +13,7 @@
                     {{form.as_p}}
                     {{form.media}}
 
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary " style='background-color: black'>
                         Save
                     </button>
                 </form>

@@ -5,32 +5,23 @@
      <div class="row">
           <div class="col-md-6 offset-md-3">
                <h1 class="text-center py-5" style="color: #20c997;">Tareas pendientes</h1>
-
+           
                <ul class="list-group">
-                    {% for task in tasks %}
-          
-                    <a href="{% url 'task detail' task.id %}"class="list-group-item"> 
-                              <header class="d-flex justify-content-between">
-                                   {% if task.important %}
-                                   <h1 class="fw-bold text-success">{{task.title}}</h1>
-                                   {% else %}
-                                   <h1 class="fw-bold">{{task.title}}</h1>
-                                   
-                                   {% endif %}
-                                   <p>Usuario: {{task.user.username}}</p>
-                              </header>
-
-                              <p>{{task.description|safe}}</p>
-
-                              
-                              <p>{% if task.important == True %} Es Importante {% else %} No es importante {% endif %}</p>
-                              <p>{{task.datecompleted|date:"M j Y:i"}}</p>
-                    </a>
-          
-                    {%endfor%}
+                   {% for task in tasks %}
+                       <a href="{% url 'task detail' task.id %}" class="list-group-item"> 
+                           <header class="d-flex justify-content-between">
+                               <h1 class="fw-bold text-success">{{task.title}}</h1>
+                           </header>
+                           <p>Usuario: {{task.user.username}}</p>
+                           <p>{{task.description|safe}}</p>
+                           <p>{{task.datecompleted|date:"M j Y:i"}}</p>
+                       </a>
+                   {% empty %}
+                       <p>No hay tareas disponibles.</p>
+                   {% endfor %}
                </ul>
-               
-          </div>
+           </div>
+           
 
      </div>
    </main>
