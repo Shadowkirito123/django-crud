@@ -4,9 +4,9 @@
     <main class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4">
-                
+                <h1 class='text-white'>Crear una publicacion</h1>
                 <form action="/createtask/" method="POST" class="card card-body mt-5" enctype="multipart/form-data" >
-                    <h1>Crear una publicacion</h1>
+                    
                     {{error}}
                     {% csrf_token %}
                     {{form.as_p}}

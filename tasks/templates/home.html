@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-
         {% if user.is_authenticated %}
                 <!DOCTYPE html>
         <html lang="es">
@@ -96,7 +95,6 @@
 
         {% else %}
 
-
         <section class="card card-body bg-transparent text-white border-0">
             <h1 class="text-center" style="color: #20c997"><i class="fas fa-hand-sparkles"></i> ¡Bienvenido!</h1>
             <p class="text-center"><i class="fas fa-info-circle text-danger"></i> Estamos emocionados de tenerte aquí. Nuestra aplicación ofrece una variedad de características útiles.</p>
@@ -128,5 +126,5 @@
         </div>
     </main>
 
-{% endif %}
+    {% endif %}
 {% endblock %}
