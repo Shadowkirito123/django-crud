@@ -16,8 +16,6 @@
       max-width: 200%; 
     }
 
-<h5 style="color: white;">Comentarios:</h5>
-<ul style="color: white;">
     .task-description {
       margin-top: 3px;
     }
@@ -54,8 +52,13 @@
      </div>
      <button type="submit" class="btn btn-dark mt-3">Enviar</button>  </form>
  </div>
+
+
+ <!-- aqui esta todo lo que saque del style-->
  <p>{{task.description|safe}}</p>
  {% if comentarios %}
+      <h5 style="color: white;">Comentarios:</h5>
+      <ul style="color: white;">
          {% for comentario in comentarios %}
              <li>{{ comentario.comment }} (usuario: {{comentario.user.username}})</li>
          {% endfor %}
