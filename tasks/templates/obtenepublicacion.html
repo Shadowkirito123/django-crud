@@ -55,16 +55,18 @@
 
 
  <!-- aqui esta todo lo que saque del style-->
- <p>{{task.description|safe}}</p>
+ <p>{{ task.description|safe }}</p>
+
  {% if comentarios %}
-      <h5 style="color: white;">Comentarios:</h5>
-      <ul style="color: white;">
-         {% for comentario in comentarios %}
-             <li>{{ comentario.comment }} (usuario: {{comentario.user.username}})</li>
-         {% endfor %}
-     {% else %}
-          <li>No hay comentarios para esta tarea.</li>
-     {% endif %}
-     </ul>
+   <h5 style="color: white;">Comentarios:</h5>
+   <ul style="color: white;">
+     {% for comentario in comentarios %}
+       <li>{{ comentario.comment }} (usuario: {{ comentario.user.username }})</li>
+     {% endfor %}
+   </ul>
+ {% else %}
+   <p style="color: white;">No hay comentarios para esta tarea.</p>
+ {% endif %}
+ 
 
 {% endblock %}
