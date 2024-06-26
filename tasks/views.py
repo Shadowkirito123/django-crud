@@ -420,9 +420,10 @@ def cambio(request):
         new_color.save()
         return redirect('/')
     
-def obtenercolor(request):
+@login_required
+def obtenerpubli(request):
     color = Task.objects.all()
-    return render(request, 'obtenercolor.html',{
+    return render(request, 'obtenerpubli.html',{
         'color': color
     })
     
@@ -432,10 +433,13 @@ def sobrenosotros_view(request):
 def verpublicacion(request, task_id):
     if request.method == 'GET':
         task = get_object_or_404(Task, pk=task_id)
+        comentarios = Comentarios.objects.filter(task=task)
         return render (request, 'obtenepublicacion.html', {
-            'task':task
+            'task':task,
+            'comentarios': comentarios
         })
 
+@login_required
 def comentarpublicion(request, task_id):
     if request.method == 'GET':
         return render(request, 'obtenepublicacion.html')
@@ -445,10 +449,3 @@ def comentarpublicion(request, task_id):
         new_comentario = Comentarios(user = request.user, comment = comentario, task = tarea)
         new_comentario.save()
         return redirect('/')
-
-def mostrarcomentario(request):
-    tarea = Comentarios.objects.get(task = request.POST['id'])
-    return render(request, 'obtenepublicacion.html',{
-        'tarea':tarea
-    })
-    

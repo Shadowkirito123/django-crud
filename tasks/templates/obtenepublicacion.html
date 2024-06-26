@@ -17,10 +17,21 @@
       max-width: 200%; 
     }
 
-    .task-title {
-      display: flex; 
-      justify-content: space-between; 
-    }
+              <p>{{task.description|safe}}</p>
+              
+</ul>
+
+
+<h5 style="color: white;">Comentarios:</h5>
+<ul style="color: white;">
+     {% if comentarios %}
+         {% for comentario in comentarios %}
+             <li>{{ comentario.comment }} (usuario: {{comentario.user.username}})</li>
+         {% endfor %}
+     {% else %}
+          <li>No hay comentarios para esta tarea.</li>
+     {% endif %}
+     </ul>
 
     .task-description {
       margin-top: 3px;
