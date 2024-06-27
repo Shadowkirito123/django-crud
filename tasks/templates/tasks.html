@@ -1,33 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<<<<<<< HEAD
 <main class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <h1 class="text-center py-5" style="color: #20c997;">Mis publicaciones</h1>
+=======
+   <main class="container">
+     <div class="row">
+          <div class="col-md-6 offset-md-3">
+               <h1 class="text-center py-5" style="color: #20c997;">Tareas pendientes</h1>
+>>>>>>> parent of a6e8a49 (arreglo porfin de las interfaz mis publicaciones y publicacion)
 
-      <ul class="list-group" style="border: none; border-radius: 4px;">  {% for task in tasks %}
-          <li class="list-group-item mb-3" style="color: black;">  <a href="{% url 'task detail' task.id %}" style="color: black; text-decoration: none;">  <header class="d-flex justify-content-between">
-                {% if task.important %}
-                  <h1 class="fw-bold text-success">{{ task.title }}</h1>
-                {% else %}
-                  <h1 class="fw-bold">{{ task.title }}</h1>
-                {% endif %}
-                <p>Usuario: {{ task.user.username }}</p>
-              </header>
+               <ul class="list-group">
+                    {% for task in tasks %}
+          
+                    <a href="{% url 'task detail' task.id %}"class="list-group-item"> 
+                              <header class="d-flex justify-content-between">
+                                   {% if task.important %}
+                                   <h1 class="fw-bold text-success">{{task.title}}</h1>
+                                   {% else %}
+                                   <h1 class="fw-bold">{{task.title}}</h1>
+                                   
+                                   {% endif %}
+                                   <p>Usuario: {{task.user.username}}</p>
+                              </header>
 
-              <p>{{ task.description|safe }}</p>
+                              <p>{{task.description|safe}}</p>
 
-              <p>
-                {% if task.important == True %} Es Importante {% else %} No es importante {% endif %}
-              </p>
-              <p>{{ task.datecompleted|date:"M j Y:i" }}</p>
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-</main>
+                              
+                              <p>{% if task.important == True %} Es Importante {% else %} No es importante {% endif %}</p>
+                              <p>{{task.datecompleted|date:"M j Y:i"}}</p>
+                    </a>
+          
+                    {%endfor%}
+               </ul>
+               
+          </div>
+
+     </div>
+   </main>
 {% endblock %}
-
