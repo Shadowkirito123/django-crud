@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,9 +44,30 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2/hQAJumDh9qeUJQELjRUboqyl17IEZGJvjlNlnrI69qkR+8uOMiqsREike" crossorigin="anonymous"></script>
 </body>
 </html>
+=======
+<input type="hidden" id="id" name="id" value="{{task.id}}">
+<ul class="list-group list-group-item">
+              <header class="d-flex justify-content-between">
+                   {% if task.important %}
+                   <h1 class="fw-bold text-success">{{task.title}}</h1>
+                   {% else %}
+                   <h1 class="fw-bold">{{task.title}}</h1>
+                   
+                   {% endif %}
+                   <p>Usuario: {{task.user.username}}</p>
+              </header>
 
-<div class="container ">  <form action="{% url 'comentar' task.id %}" method="POST" class="form-group d-flex flex-column justify-content-center align-items-center">
+              <p>{{task.description|safe}}</p>
+              
+</ul>
+{{tarea}}
+
+>>>>>>> parent of f2de929 (estilos de publicaciones)
+
+
+<form action="{% url 'comentar' task.id %}" method="POST">
      {% csrf_token %}
+<<<<<<< HEAD
      <div class="col-md-6">
        <label for="comentario" class="col-form-label text-center text-white">Quieres hacer un comentario?</label>
        <input type="text" name="comentario" id="comentario" class="form-control">
@@ -68,5 +90,13 @@
    <p style="color: white;">No hay comentarios para esta tarea.</p>
  {% endif %}
  
+=======
+     <h5><label for="comentario">Comentarios</label></h5>
+     <h5><input type="text" name="comentario" id="comentario"></h5>
+     <button>
+          Enviar
+     </button>
+</form>
+>>>>>>> parent of f2de929 (estilos de publicaciones)
 
 {% endblock %}

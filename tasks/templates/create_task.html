@@ -3,11 +3,15 @@
 {% block content %}
     <main class="container">
         <div class="row">
+<<<<<<< HEAD
             <h1 class='text-center' style='color: #20c997'>Crear una publicacion</h1>
             <div class="col-md-6 offset-md-3">
+=======
+            <div class="col-md-4 offset-md-4">
+>>>>>>> parent of f2de929 (estilos de publicaciones)
                 
                 <form action="/createtask/" method="POST" class="card card-body mt-5" enctype="multipart/form-data" >
-                    
+                    <h1>Crear una publicacion</h1>
                     {{error}}
                     {% csrf_token %}
                     {{form.as_p}}
