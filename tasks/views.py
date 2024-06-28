@@ -432,8 +432,10 @@ def sobrenosotros_view(request):
 def verpublicacion(request, task_id):
     if request.method == 'GET':
         task = get_object_or_404(Task, pk=task_id)
+        comentarios = Comentarios.objects.filter(task=task)
         return render (request, 'obtenepublicacion.html', {
-            'task':task
+            'task':task,
+            'comentarios': comentarios
         })
 
 def comentarpublicion(request, task_id):
