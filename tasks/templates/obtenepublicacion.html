@@ -60,24 +60,13 @@
               <p>{{task.description|safe}}</p>
               
 </ul>
-
-
-<h5 style="color: white;">Comentarios:</h5>
-<ul style="color: white;">
-     {% if comentarios %}
-         {% for comentario in comentarios %}
-             <li>{{ comentario.comment }} (usuario: {{comentario.user.username}})</li>
-         {% endfor %}
-     {% else %}
-          <li>No hay comentarios para esta tarea.</li>
-     {% endif %}
-     </ul>
+{{tarea}}
 
 
 
 <form action="{% url 'comentar' task.id %}" method="POST">
      {% csrf_token %}
-     <h5 style="color: white;"><label for="comentario">Comentarios</label></h5>
+     <h5><label for="comentario">Comentarios</label></h5>
      <h5><input type="text" name="comentario" id="comentario"></h5>
      <button>
           Enviar
