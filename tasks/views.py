@@ -420,10 +420,10 @@ def cambio(request):
         new_color.save()
         return redirect('/')
     
-def obtenercolor(request):
-    color = Task.objects.all()
-    return render(request, 'obtenercolor.html',{
-        'color': color
+def obtenerpubli(request):
+    publicacion = Task.objects.all()
+    return render(request, 'obtenerpubli.html',{
+        'publicacion': publicacion
     })
     
 def sobrenosotros_view(request):
