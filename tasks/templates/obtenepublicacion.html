@@ -60,38 +60,24 @@
               <p>{{task.description|safe}}</p>
               
 </ul>
-{{tarea}}
 
->>>>>>> parent of f2de929 (estilos de publicaciones)
+
+<h5 style="color: white;">Comentarios:</h5>
+<ul style="color: white;">
+     {% if comentarios %}
+         {% for comentario in comentarios %}
+             <li>{{ comentario.comment }} (usuario: {{comentario.user.username}})</li>
+         {% endfor %}
+     {% else %}
+          <li>No hay comentarios para esta tarea.</li>
+     {% endif %}
+     </ul>
+
 
 
 <form action="{% url 'comentar' task.id %}" method="POST">
      {% csrf_token %}
-<<<<<<< HEAD
-     <div class="col-md-6">
-       <label for="comentario" class="col-form-label text-center text-white">Quieres hacer un comentario?</label>
-       <input type="text" name="comentario" id="comentario" class="form-control">
-     </div>
-     <button type="submit" class="btn btn-dark mt-3">Enviar</button>  </form>
- </div>
-
-
- <!-- aqui esta todo lo que saque del style-->
- <p>{{ task.description|safe }}</p>
-
- {% if comentarios %}
-   <h5 style="color: white;">Comentarios:</h5>
-   <ul style="color: white;">
-     {% for comentario in comentarios %}
-       <li>{{ comentario.comment }} (usuario: {{ comentario.user.username }})</li>
-     {% endfor %}
-   </ul>
- {% else %}
-   <p style="color: white;">No hay comentarios para esta tarea.</p>
- {% endif %}
- 
-=======
-     <h5><label for="comentario">Comentarios</label></h5>
+     <h5 style="color: white;"><label for="comentario">Comentarios</label></h5>
      <h5><input type="text" name="comentario" id="comentario"></h5>
      <button>
           Enviar
