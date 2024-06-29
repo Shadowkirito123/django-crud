@@ -41,6 +41,7 @@ urlpatterns = [
     path('obtener/', views.obtenerpubli, name='obtener'),
     path('obtener/<int:task_id>', views.verpublicacion, name='ver'),
     path('obtener/<int:task_id>/comentario', views.comentarpublicion, name ='comentar'),
+    path('obtener/mostrar', views.mostrarcomentario, name='mostrar'),
     path('publica/', views.verpublicacion, name='publica'),
     path('prueba/', views.comentarpublicion, name='prueba'),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),

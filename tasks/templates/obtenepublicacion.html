@@ -1,73 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ZenhBwPWqEJEGVz0iIWQoE4RnJx2v+kCzE/Q8f/T/" crossorigin="anonymous">
-  <style>
-    .task-title {
-      background-color: #f5f5f5;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 50px auto;
-      max-width: 200%;
-    }
+<input type="hidden" id="id" name="id" value="{{task.id}}">
+<ul class="list-group list-group-item">
+              <header class="d-flex justify-content-between">
+                  {% if task.important %}
+                    <h1 class="fw-bold text-success">{{task.title}}</h1>
+                  {% else %}
+                    <h1 class="fw-bold">{{task.title}}</h1>
+                  
+                  {% endif %}
+                    <p>Usuario: {{task.user.username}}</p>
+              </header>
 
-    .task-description {
-      margin-top: 3px;
-    }
+              <p>{{task.description|safe}}</p>
+              
+</ul>
 
-    .task-link a {
-      text-decoration: none;
-      color: #007bff; /* Adjust color to fit your design */
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="row justify-content-center align-items-center">
-      <div class="col col-md-auto">
-        <div class="task-title">
-          <header class="task-title">
-            {% if task.important %}
-              <h1 class="fw-bold text-success">{{ task.title }}</h1>
-            {% else %}
-              <h1 class="fw-bold">{{ task.title }}</h1>
-            {% endif %}
-            <p>Usuario: {{ task.user.username }}</p>
-          </header>
-          <p class="task-description">{{ task.description|safe }}</p>
-          <div class="task-link">
-            <a href="{% url 'comentar' task.id %}">Comentar ({{ comentarios.count }})</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <h5 style="color: white;">Comentarios:</h5>
-  <ul style="color: white;">
+<h5 style="color: white;">Comentarios:</h5>
+<ul style="color: white;">
     {% if comentarios %}
-      {% for comentario in comentarios %}
-        <li>{{ comentario.comment }} (usuario: {{ comentario.user.username}})</li>
-      {% endfor %}
+        {% for comentario in comentarios %}
+            <li>{{ comentario.comment }} (usuario: {{comentario.user.username}})</li>
+        {% endfor %}
     {% else %}
-      <li>No hay comentarios para esta tarea.</li>
+          <li>No hay comentarios para esta tarea.</li>
     {% endif %}
-  </ul>
+</ul>
 
-  <form action="{% url 'comentar' task.id %}" method="POST">
-    {% csrf_token %}
-    <h5 style="color: white;"><label for="comentario">Comentarios</label></h5>
-    <h5><input type="text" name="comentario" id="comentario"></h5>
-    <button type="submit">Enviar</button>
-  </form>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2/hQAJumDh9qeUJQELjRUboqyl17IEZGJvjlNlnrI69qkR+8uOMiqsREike" crossorigin="anonymous"></script>
-</body>
-</html>
+<form action="{% url 'comentar' task.id %}" method="POST">
+  {% csrf_token %}
+  <h5 style="color: white;"><label for="comentario">Comentarios</label></h5>
+  <h5><input type="text" name="comentario" id="comentario"></h5>
+  <button>
+      Enviar
+  </button>
+</form>
 
 {% endblock %}
