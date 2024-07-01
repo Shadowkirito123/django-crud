@@ -15,7 +15,7 @@ class TaskForm(forms.ModelForm):
             # 'important': forms.CheckboxInput(attrs={'class': 'form-control'})
         }
 
-class NuevoForm(forms.ModelForm):
+class NuevaImagen(forms.ModelForm):
     class Meta:
         model = ImagenPerfil
         fields = ['imagen']

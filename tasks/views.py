@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-from .forms import TaskForm, NuevoForm
+from .forms import TaskForm, NuevaImagen
 from .models import Task, Tokens, Pagina, Colores, Comentarios, ImagenPerfil
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -462,3 +462,21 @@ def comentarpublicion(request, task_id):
         new_comentario = Comentarios(user = request.user, comment = comentario, task = tarea)
         new_comentario.save()
         return redirect('/')
+
+def imagenPerfil(request):
+    if request.method  == 'GET':
+        return render(request, 'prueba.html', {
+            'form': NuevaImagen
+        })
+    else:
+        imagen = NuevaImagen(request.POST, request.FILES)
+        if imagen.is_valid():
+            form = imagen.save(commit=False)
+            form.user = request.user
+            form.save()
+            return redirect('/')
+        else:
+            return render(request, 'prueba.html', {
+                'form': imagen,
+                'error': 'Error al subir la imagen'
+            })

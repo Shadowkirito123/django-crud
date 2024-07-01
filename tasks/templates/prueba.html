@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action="{% url 'prueba' %}" method="POST">
+
+<form method="POST" enctype="multipart/form-data">
      {% csrf_token %}
-     <h5><label for="comentario">Comentarios</label></h5>
-     <h5><input type="text" name="comentario" id="comentario"></h5>
+     {{form.as_p}}
+
      <button>
           Enviar
      </button>
