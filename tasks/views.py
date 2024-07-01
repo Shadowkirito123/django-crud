@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-from .forms import TaskForm, Public
-from .models import Task, Tokens, Pagina, Colores, Comentarios
+from .forms import TaskForm, NuevoForm
+from .models import Task, Tokens, Pagina, Colores, Comentarios, ImagenPerfil
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -12,7 +12,6 @@ from django.contrib.auth.tokens import default_token_generator
 from django.urls import reverse
 from django.http import HttpResponse
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from django.urls.exceptions import NoReverseMatch
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -413,13 +412,21 @@ def restablecer_contraseña(request, user_id, token):
     
 def cambio(request):
     if request.method == 'GET':
-        return render(request, 'cambioColor.html')
+        return render(request, 'cambioColor.html',{
+            'imagen': NuevoForm
+        })
     else:
+        #
+        imagen = NuevoForm(request.POST, request.FILES)
+        imagen.save()
+        #
+
+        #
         color = request.POST['color']
         new_color = Colores(user=request.user, color_fondo=color)
         new_color.save()
         return redirect('/')
-    
+        #
 def obtenerpubli(request):
     publicacion = Task.objects.all()
     return render(request, 'obtenerpubli.html',{
@@ -453,4 +460,3 @@ def mostrarcomentario(request):
     return render(request, 'obtenepublicacion.html',{
         'tarea':tarea
     })
-    

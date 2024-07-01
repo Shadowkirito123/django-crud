@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <form action="{% url 'cambio'%}" method="POST">
     <h5><input type="hidden" name="id"></h5>
@@ -7,9 +6,11 @@
     <h1 style="color: white;">Cambio de colores</h1>
     <p style="color: white;"><label for="color">Cambiar el color de la pagina:</label>
     <input type="color" name="color" id="color"></p>
+
+    <h5>{{imagen}}</h5>
     <button>
-        Guardar
+        Subir
     </button>
 </form>
-{{form.color_fondo}}
+
 {% endblock %}
