@@ -208,6 +208,14 @@ def complete_task(request, task_id):
         task.save()
         return redirect('tasks')
 
+@login_required
+def update_task(request, task_id):
+    if request.method == 'POST':
+        task = get_object_or_404(Task, pk=task_id, user= request.user)
+        form = TaskForm(request.POST,instance=task)
+        form.save()
+        return redirect('tasks') 
+
 @login_required    
 def delete_task(request, task_id):
     task = get_object_or_404(Task, pk=task_id, user= request.user)
@@ -454,9 +462,3 @@ def comentarpublicion(request, task_id):
         new_comentario = Comentarios(user = request.user, comment = comentario, task = tarea)
         new_comentario.save()
         return redirect('/')
-
-def mostrarcomentario(request):
-    tarea = Comentarios.objects.get(task = request.POST['id'])
-    return render(request, 'obtenepublicacion.html',{
-        'tarea':tarea
-    })
