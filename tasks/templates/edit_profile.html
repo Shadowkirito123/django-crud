@@ -6,7 +6,7 @@
         <form action="" method="POST">
             {% if error %}
                 <div id="errorAlert" class="alert alert-danger" role="alert">
-                  <i class="fas fa-times"></i> {{ error }}
+                <i class="fas fa-times"></i> {{ error }}
                 </div>
                 {% endif %}
             {% csrf_token %}
@@ -22,6 +22,16 @@
                 <div class="mb-3">
                     <label for="userEmail" class="form-label"><i class="fas fa-envelope"></i> Correo:</label>
                     <input type="email" class="form-control" id="userEmail" name="userEmail" value="{{datos.email}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="Foto" class="form-label"> <i class="fa-solid fa-images"></i> Foto de perfil</label>
+
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                    </form>
+                </div>
 
             {% else %}
                 <h1 class="text-center mb-4"><i class="fas fa-edit"></i> Editar datos</h1>

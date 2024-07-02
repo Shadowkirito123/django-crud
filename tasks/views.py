@@ -247,12 +247,14 @@ def editProfile(request, user_id):
                 datos1 = get_object_or_404(Pagina, user=user_id)
                 return render(request, 'edit_profile.html',{
                 'datos': datos,
-                'datos1': datos1
+                'datos1': datos1,
+                'form': NuevaImagen
             })
             except:
                 datos = User.objects.get(id=user_id)
                 return render(request, 'edit_profile.html',{
-                'datos': datos
+                'datos': datos,
+                'form': NuevaImagen
                 })
         else:
             try:
@@ -329,6 +331,14 @@ def editProfile(request, user_id):
                         'datos': datos,
                         'error': 'Los caracteres especiales no están permitidos en el correo electrónico.'
                     })
+                
+                #Foto de perfil
+                imagen = NuevaImagen(request.POST, request.FILES)
+                if imagen.is_valid():
+                    form = imagen.save(commit=False)
+                    form.user = request.user
+                    form.save()
+                    return redirect('user')
                 #
                 #Actualizando datos
                 datos = User.objects.get(id=user_id)
@@ -435,6 +445,7 @@ def cambio(request):
         new_color.save()
         return redirect('/')
         #
+
 def obtenerpubli(request):
     publicacion = Task.objects.all()
     return render(request, 'obtenerpubli.html',{
